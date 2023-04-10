@@ -1,0 +1,39 @@
+
+
+<ion-content >
+
+  <ion-card>
+     <div class="glassy">
+
+    <ion-card-header>
+      <b>LOGIN</b>
+    </ion-card-header>
+<ion-card-content>
+<form [formGroup]="credentials" (ngSubmit)="login()">
+  <ion-list no-lines class="ion-margin-bottom">
+    
+  <ion-item fill="outline" class="ion-margin-bottom">
+    <ion-label position="floating" >Email address</ion-label>
+    <ion-input  color="tertiary" placeholder="Enter your email address" type="email" formControlName="email" ></ion-input>
+    <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email is not correct!</ion-note>
+  </ion-item>
+  <ion-item fill="outline" class="ion-margin-bottom" >
+    <ion-label position="floating">Password </ion-label>
+    <ion-input color="tertiary" placeholder="enter your password" type="password" formControlName="password" ></ion-input>
+    <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">password not accepted!</ion-note>
+  </ion-item>
+  <ion-button expand="full" type="submit"[disabled]="!credentials.valid">Login</ion-button>
+</ion-list>
+<br/>
+<b>OR</b> <br/> <br/>
+<ion-button  expand="full"  block>
+<ion-icon name="logo-google"></ion-icon>
+<div> &nbsp;&nbsp; Login with Google</div>
+</ion-button>
+</form>
+<br/>
+<a [routerLink]="['/sign-up']">Not have an account?</a>
+</ion-card-content>
+</div>
+</ion-card>
+</ion-content>

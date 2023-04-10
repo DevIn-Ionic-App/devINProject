@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "devin-c65b4": {
+      "hosting": {
+        "app": [
+          "devin-c65b4"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "devin-c65b4"
+  }
+}

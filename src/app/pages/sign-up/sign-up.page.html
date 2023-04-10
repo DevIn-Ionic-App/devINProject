@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sign-up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="credentials" (ngSubmit)="register()">
+  <ion-item fill="solid" class="ion-margin-bottom">
+    <ion-input placeholder="Enter your email address" type="email" formControlName="email" ></ion-input>
+    <ion-note slot="error" *ngIf="(email?.dirty || email?.touched) && email?.errors">Email is not correct!</ion-note>
+  </ion-item>
+  <ion-item fill="solid" class="ion-margin-bottom" >
+    <ion-input placeholder="Password" type="password" formControlName="password" ></ion-input>
+    <ion-note slot="error" *ngIf="(password?.dirty || password?.touched) && password?.errors">password not accepted!</ion-note>
+  </ion-item>
+  <ion-button expand="full" type="submit" >Register</ion-button>
+</form>
+</ion-content>

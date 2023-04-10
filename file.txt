@@ -1,0 +1,8 @@
+This will work most certainly!!!
+
+Please try this command
+
+set "NODE_TLS_REJECT_UNAUTHORIZED=0"
+and then re-run,
+
+firebase login
