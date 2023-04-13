@@ -1,6 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
+ 
+
   credentials!:FormGroup;
   constructor(private fb:FormBuilder,
     private loadingController:LoadingController,
@@ -23,10 +25,14 @@ export class SignUpPage implements OnInit {
     get password(){
       return this.credentials.get('password');
     }
+    get name(){
+      return this.credentials.get('name');
+    }
   ngOnInit() {
     this.credentials = this.fb.group({
+      name: ['', [Validators.required,Validators.minLength(6)]],
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 

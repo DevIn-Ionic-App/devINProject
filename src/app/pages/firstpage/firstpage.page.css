@@ -1,0 +1,70 @@
+ion-card {
+  background: url(../../../assets/images/imgfisrtpage1.jpg) 0 0/100% 100% no-repeat;
+  height: 52%;
+  border-radius: 14px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+main::before {
+  background: linear-gradient(to right bottom, #f1f0f1, #fffefe, #ececec, #e2e1e2) 0/cover fixed;
+}
+
+main {
+  position: relative;
+  background: rgba(255, 255, 255, 0.25) border-box;
+  overflow: hidden;
+  border-radius: 0.3em;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+  width: 100%;
+  height: 100%;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.text-welcome {
+  padding-top: 10%;
+  font-size: 17px;
+  color: #272727;
+  font-weight: 800;
+}
+
+.text-welcome > span {
+  font-size: 21px;
+  font-weight: bolder;
+  color: #8b3a55;
+}
+
+.btns {
+  margin: 10% 33%;
+  display: flex;
+}
+
+ion-button {
+  --border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+ion-card-header {
+  padding: 0 10%;
+}
+
+.btn1 {
+  --background: #ffffff;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.btn2 {
+  --background: #e2e0e2 !important;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}/*# sourceMappingURL=firstpage.page.css.map */

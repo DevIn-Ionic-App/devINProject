@@ -1,0 +1,44 @@
+ion-content {
+  --background: url(../../../assets/images/background6.jpg) 0 0/100% 100% no-repeat;
+}
+
+ion-card {
+  background: transparent;
+  margin-top: 40%;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  --border: none;
+}
+
+ion-input {
+  --border:none;
+}
+
+ion-label {
+  background: none;
+}
+
+ion-card-header {
+  font-size: 21px;
+  color: #494848;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.glassy {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.2px);
+  -webkit-backdrop-filter: blur(7.2px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.scroll-content {
+  text-align: center;
+}/*# sourceMappingURL=login.page.css.map */

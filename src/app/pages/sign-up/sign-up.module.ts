@@ -16,6 +16,7 @@ import { SignUpPage } from './sign-up.page';
     SignUpPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [SignUpPage]
+  declarations: [SignUpPage,
+  ]
 })
 export class SignUpPageModule {}
