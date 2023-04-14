@@ -1,30 +1,67 @@
-ion-content {
-  --background: url(../../../assets/images/background6.jpg) 0 0/100% 100% no-repeat;
+ion-content.signup {
+  --background: url(../../../assets/images/bg5.jpg) 0 0/100% 100%
+    no-repeat;
 }
-
-ion-title.title {
+ion-content.signup ion-title {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  text-align: center;
+  margin-top: 60px;
+  width: 100%;
+  padding-inline: 0px;
 }
-
-ion-card {
+ion-content.signup ion-title h2 {
+  margin-bottom: 10px;
+  color: var(--gray);
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding-inline: 0px;
+}
+ion-content.signup ion-title p {
+  margin-top: -5px;
+  color: var(--gray);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff;
+  padding-inline: 0px;
+}
+ion-content.signup ion-title p span {
+  color: var(--lblue);
+  font-weight: 700;
+}
+ion-content.signup ion-card {
+  width: 90%;
+  margin: auto;
+  margin-top: 160px;
+}
+ion-content.signup ion-card ion-card-content form ion-list {
+  padding-top: 20px;
   background: transparent;
-  margin-top: 40%;
 }
-
-ion-list {
-  background: transparent;
-}
-
-ion-item {
+ion-content.signup ion-card ion-card-content form ion-list ion-item {
   --background: transparent;
-  --border: none;
-}
-
-ion-input {
+  border-bottom: none;
   --border:none;
+  border-radius: 8px;
+}
+ion-content.signup ion-card ion-card-content form ion-list ion-input {
+  background: transparent;
+  --border:none;
+  font-weight: 500;
+  font-size: 1rem;
+  --placeholder-color: var(--gray);
+  --placeholder-opacity:.7;
+}
+ion-content.signup ion-card ion-card-content form ion-list ion-button {
+  --border-radius: 8px !important;
+  --background: var(--dgreen);
+  --background-hover:var(--lgreen);
+  --background-focused:var(--lgreen);
+  margin-top: 40px;
+}
+ion-content.signup ion-card ion-card-content a {
+  color: var(--lblue);
 }
 
 ion-label {

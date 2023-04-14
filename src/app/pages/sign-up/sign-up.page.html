@@ -1,13 +1,10 @@
-<ion-content>
+<ion-content class="signup">
   <ion-title class="title">
-    <b class="welcom-sign">Create an Account</b>
-    <p>and join the DevIN /> community!</p>
+    <h2 class="welcom-sign">Create an Account</h2>
+    <p>and join the <span>&#60; DevIN /	&#62;</span> community!</p>
   </ion-title>
-  <ion-card>
-    <div class="glassy">
-      <ion-card-header>
-        <b>Sign Up</b>
-      </ion-card-header>
+  <ion-card class="glassy">
+     
       <ion-card-content>
       <form [formGroup]="credentials" (ngSubmit)="register()">
         <ion-list no-lines class="ion-margin-bottom">
@@ -20,7 +17,7 @@
           <ion-note
             slot="error"
             *ngIf="(name?.dirty || name?.touched) && name?.errors"
-            >Name is not correct!</ion-note
+            >Name is too short!</ion-note
           >
         </ion-item>
         <ion-item fill="outline" class="ion-margin-bottom">
@@ -44,15 +41,14 @@
           <ion-note
             slot="error"
             *ngIf="(password?.dirty || password?.touched) && password?.errors"
-            >password not accepted!</ion-note
+            >password too short!</ion-note
           >
         </ion-item>
 
         <ion-button expand="full" type="submit" [disabled]="!credentials.valid">Register</ion-button>
       </ion-list></form>
       <br/>
-<a [routerLink]="['/sign-up']">Already have an account?</a>
+<a [routerLink]="['/login']">Already have an account?</a>
     </ion-card-content>
-    </div>
   </ion-card>
 </ion-content>

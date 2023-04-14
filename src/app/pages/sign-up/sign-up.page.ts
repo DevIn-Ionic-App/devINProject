@@ -30,7 +30,7 @@ export class SignUpPage implements OnInit {
     }
   ngOnInit() {
     this.credentials = this.fb.group({
-      name: ['', [Validators.required,Validators.minLength(6)]],
+      name: ['', [Validators.required,Validators.minLength(3)]],
       email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -57,6 +57,9 @@ async register(){
 
   }
   else{
+    const name= this.credentials.value.name;
+    const email= this.credentials.value.email;
+    this.authService.addUser(name,email, user.user.uid )
     this.router.navigateByUrl('/home',{replaceUrl:true});
   }
 }
