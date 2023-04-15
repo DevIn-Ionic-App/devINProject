@@ -1,18 +1,47 @@
-<ion-header >
-  <ion-toolbar color="primary">
-<ion-buttons slot="start">
-  <ion-button (click)="logout()">
-    <ion-icon slot="icon-only" name="log-out"></ion-icon>
-     
-  </ion-button>
-</ion-buttons> 
-
-<ion-title>
-    Home Page
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
- <p>Yeay ! you are logged </p>
+<ion-content class="home" >
+     <div class="home-header">
+      <ion-searchbar value="Value"></ion-searchbar>
+       <img class="profil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1osY7x6Dr4JdxETV2aanhoJt0lt0yxe-6kg&usqp=CAU"/>
+      </div>
+      <div class="home-content">
+        <!-- ========================================= trending articles ============================= -->
+      <h3 class="ar-title">Trendings 🔥</h3>
+      <div class="scroll-article">
+         <div *ngFor="let trend of trendy">
+          <div class="tr">
+            <img src="{{trend.img}}"/>
+            <h3>{{trend.title}}</h3>
+            <div class="tr-author">
+              <img src="{{trend.img}}"/>
+              <p>author</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- =========================================== articles categories =================================== -->
+      <div class="categories">
+        <ul>
+          <li>IT</li>
+          <li>Soft Skills</li>
+          <li>Internship</li>
+          <li>Job</li>
+          <li>Interview Q&A</li>
+        </ul>
+      </div>
+      <div class="articles">
+        <div *ngFor="let article of articles">
+          <div class="article">
+            <img src="{{article.img}}"/>
+            <div class="article-data">
+              <h4>{{article.title}}</h4>
+              <div class="article-author">
+                <img src="{{article.img}}">
+                <p>author</p>
+                <p><span> 🕑</span> 15 hour</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
 </ion-content>

@@ -35,13 +35,13 @@ ion-content.signup {
       }
     }
   }
-  ion-card {
+  ion-card.sign-card {
     // margin-top: -40px;
-    width:90%;
+    // width:90%;
     // margin-left: 20px;
     // margin-right: 20px;
     margin: auto;
-    margin-top: 160px;
+    margin-top: 10%;
 
     ion-card-content {
       form {
@@ -72,7 +72,7 @@ ion-content.signup {
         }
       }
       a{
-        color:var(--lblue)
+        color:white
       }
     }
   }
@@ -98,12 +98,16 @@ ion-card-header {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .glassy {
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+ border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.2px);
-  -webkit-backdrop-filter: blur(7.2px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+   backdrop-filter: blur(4.1px);
+  -webkit-backdrop-filter: blur(4.1px);  padding: 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  margin-top: 40%;
 }
 .scroll-content {
   text-align: center;

@@ -6,7 +6,7 @@ export interface Article {
     date:Date;
     content: string;
     likes :number;
-    shares : number;
-
-    
+    saves : number;
+    img: string;
+    category: string;
 }
