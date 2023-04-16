@@ -10,6 +10,7 @@ import { NowPipe } from './pipes/now.pipe';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: []
 })
 export class SharedModule { }

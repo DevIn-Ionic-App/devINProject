@@ -47,11 +47,14 @@ async login(){
   const user= await this.authService.login(this.credentials.value);
   await loading.dismiss();
 
-  if(user){
-    this.router.navigateByUrl('/home',{replaceUrl:true});
+  if(user== null){
+    this.showAlert('Login failed', 'Please try again later!')
+
   }
   else{
-    this.showAlert('Login failed', 'Please try again later!')
+    this.router.navigateByUrl('/home',{replaceUrl:true});
+
   }
 }
+
 }
