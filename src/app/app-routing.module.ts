@@ -33,7 +33,11 @@ const routes: Routes = [
   {
     path: 'article-details',
     loadChildren: () => import('./pages/articles/article-details/article-details.module').then( m => m.ArticleDetailsPageModule)
+  },  {
+    path: 'comments-page',
+    loadChildren: () => import('./pages/articles/comments-page/comments-page.module').then( m => m.CommentsPagePageModule)
   }
+
 ];
 
 @NgModule({
