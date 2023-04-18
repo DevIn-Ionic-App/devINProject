@@ -4,5 +4,6 @@ export interface User {
     email: string;
     photoUrl: string;
     bio: string;
-    speciality:string
+    speciality:string;
+    country:string;
 }

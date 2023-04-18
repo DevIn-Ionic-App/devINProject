@@ -1,0 +1,81 @@
+.author-image{
+    width :100px;
+    height :100px;
+    border-radius: 50%;
+}
+.edit_profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+    width: 100%;
+    //padding-top: 10%;
+}
+.profile{display: flex;
+flex-direction: column;
+justify-content: center;}
+
+.image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //margin: 20px 0;
+  }
+  
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-fit: cover;
+  border: 3px solid #007bff;
+    padding: 5px;
+  box-sizing: border-box;
+  }
+  
+  .camera-icon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #007bff;
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .camera-icon:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .inputs{
+    padding:0 20px;
+    height: 100%;
+  }
+ ion-button{
+  bottom:0px;
+ }
+ .back-save{
+  left: 25px;
+  //right: 10px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-top: 20px;
+  justify-content: space-between;
+  width: 90%;
+  font-size: 20px;
+  margin-left: 5%;
+}
+.back-cercle{
+width: 30px;
+height: 30px;
+  border-radius: 50%;
+  text-align: center;
+}
