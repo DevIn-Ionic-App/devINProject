@@ -3,38 +3,38 @@ ion-content.signup {
   --background: url(../../../assets/images/bg8.jpg) 0 0/100% 100%
     no-repeat;
 
-  ion-title {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 60px;
-    width:100%;
-    padding-inline:0px;
+  // ion-title {
+  //   display: flex;
+  //   flex-direction: column;
+  //   text-align: center;
+  //   margin-top: 60px;
+  //   width:100%;
+  //   padding-inline:0px;
 
-    h2 {
-      margin-bottom: 10px;
-      color: var(--gray);
-      text-shadow:  0 0 5px #ffffff, 0 0 10px #ffffff,
-      0 0 20px #ffffff, 0 0 40px #ffffff;
-      font-weight: bold;
-      font-size: 1.3rem;
-      padding-inline:0px;
-    }
-    p {
-      margin-top: -5px;
-      color: var(--gray);
-      font-weight: 600;
-      font-size: 0.9rem;
-            text-shadow:  0 0 5px #ffffff, 0 0 10px #ffffff,
-      0 0 20px #ffffff, 0 0 40px #ffffff;
-      padding-inline:0px;
+  //   h2 {
+  //     margin-bottom: 10px;
+  //     color: var(--gray);
+  //     text-shadow:  0 0 5px #ffffff, 0 0 10px #ffffff,
+  //     0 0 20px #ffffff, 0 0 40px #ffffff;
+  //     font-weight: bold;
+  //     font-size: 1.3rem;
+  //     padding-inline:0px;
+  //   }
+  //   p {
+  //     margin-top: -5px;
+  //     color: var(--gray);
+  //     font-weight: 600;
+  //     font-size: 0.9rem;
+  //           text-shadow:  0 0 5px #ffffff, 0 0 10px #ffffff,
+  //     0 0 20px #ffffff, 0 0 40px #ffffff;
+  //     padding-inline:0px;
 
-      span {
-        color: var(--lblue);
-        font-weight: 700;
-      }
-    }
-  }
+  //     span {
+  //       color: var(--lblue);
+  //       font-weight: 700;
+  //     }
+  //   }
+  // }
   ion-card.sign-card {
     // margin-top: -40px;
     // width:90%;

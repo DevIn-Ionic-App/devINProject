@@ -1,10 +1,13 @@
-<ion-content class="signup">
-  <ion-title class="title">
+<ion-content fullscreen class="signup">
+  <!-- <ion-title class="title">
     <h2 class="welcom-sign">Create an Account</h2>
     <p>and join the <span>&#60; DevIN /	&#62;</span> community!</p>
-  </ion-title>
+  </ion-title> -->
   <ion-card class="glassy sign-card">
-     
+           
+    <ion-card-header>
+      <b>SIGN UP</b>
+    </ion-card-header>
       <ion-card-content>
       <form [formGroup]="credentials" (ngSubmit)="register()">
         <ion-list no-lines class="ion-margin-bottom">

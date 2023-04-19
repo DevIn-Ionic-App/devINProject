@@ -1,13 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>createArticle</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content fullscreen >
+  
+    <div class="head">
+     
+    <div class="back-cercle" routerLink="../home"><i class="fa-solid fa-angles-left" style="color: #000;"></i></div>
+    <h2 class="title">Create Your Article 📝</h2>  
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">createArticle</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <form class="add-article" [formGroup]="articleData">
+        <ion-list no-lines class="ion-margin-bottom">
+        <div class="choose-photo">
+        
+          <span>
+            <ion-input
+            placeholder="photo"
+            type="file"
+            accept="image/*"  id="photo" style="display: none;"
+            formControlName="title"
+          ></ion-input>
+          <img class='img-icon' src="../../../../assets/icon/icon.png"/>
+          <p>Upload a photo</p>
+          </span>
+        </div>
+        <ion-item fill="outline" class="ion-margin-bottom">
+          <ion-input
+            placeholder="Title"
+            type="title"
+            formControlName="title"
+          ></ion-input>
+          <ion-note
+            slot="error"
+           
+            ></ion-note
+          >
+        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="category" interface="popover" placeholder="Select category">
+              <ion-select-option value="IT">IT</ion-select-option>
+              <ion-select-option value="job&intern">Job & Internship</ion-select-option>
+              <ion-select-option value="q&a">Interview Q&A</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-item fill="outline" class="ion-margin-bottom">
+          <ion-textarea
+            placeholder="Write the content"
+            type="content"
+            formControlName="content"
+          ></ion-textarea>
+          <ion-note
+            slot="error"
+           
+            ></ion-note
+          >
+        </ion-item>
+        <ion-button expand="full" type="submit" >Publish</ion-button>
+      </ion-list></form>
+      <br/>
 </ion-content>
+

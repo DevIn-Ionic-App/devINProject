@@ -1,0 +1,58 @@
+.head{
+    display: flex;
+    .back-cercle{
+        width: 30px;
+        height: 30px;
+          border-radius: 50%;
+          text-align: center;
+          align-self: center;
+          margin-left: 20px;
+          margin-top: 10px;
+        }
+    .title{
+        width: 100%;
+        margin:40px auto 20px auto;
+        text-align: center;
+        font-weight: 700;
+    
+    }
+}
+.add-article{
+ 
+    margin:0px 20px;
+     .choose-photo{
+        display: flex;
+        background: url('../../../../assets/images/background10.jpeg') 92% no-repeat  ;
+        height:300px;
+        width: 90%;
+        margin:20px auto;
+        border-radius:15px;
+        opacity: 0.8;
+        span{
+        .img-icon{
+           
+            color:white;
+            width:90px;
+            height: 90px;
+            display: block;
+          
+            margin:100px ;
+        }
+         p{
+            margin-top: -60px;
+            color:white;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }}
+    }
+     ion-list ion-item, ion-list ion-list{
+      margin-top: 10px;
+     }
+     ion-list ion-textarea{
+        margin-bottom: 20px;
+     }
+     ion-button{
+        margin-top: 20px;
+        --background: var(--dgreen)
+     }}
