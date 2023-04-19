@@ -113,7 +113,9 @@ ion-content.home{
       }
     }
     .categories{
-      margin-top:20px;
+      margin:20px auto;
+      text-align:center;
+      font-size: 1.1rem;
       ul{
 
         list-style: none;
@@ -127,7 +129,8 @@ ion-content.home{
         li{
           display: inline-block;
           color:gray;
-          margin:0 10px;
+          margin:0 40px;
+
 
         }
         li:active,li:focus,li:hover{

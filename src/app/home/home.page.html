@@ -1,6 +1,16 @@
 <ion-content class="home" >
      <div class="home-header">
+
       <ion-searchbar value="" color="light" class="search-bar"></ion-searchbar>
+      <ion-list>
+        <ion-item>
+          <ion-select aria-label="category" interface="popover" placeholder="Select category">
+            <ion-select-option value="IT">IT</ion-select-option>
+            <ion-select-option value="job&intern">Job & Internship</ion-select-option>
+            <ion-select-option value="q&a">Interview Q&A</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
        <img class="profil" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1osY7x6Dr4JdxETV2aanhoJt0lt0yxe-6kg&usqp=CAU" routerLink="../profile"/>
       </div>
       <div class="home-content">
@@ -19,11 +29,10 @@
       <!-- =========================================== articles categories =================================== -->
       <div class="categories">
         <ul>
-          <li>IT</li>
-          <li>Soft Skills</li>
-          <li>Internship</li>
-          <li>Job</li>
-          <li>Interview Q&A</li>
+          <li>All</li>
+          <li>Liked</li>
+          <li>Saved</li>
+       
         </ul>
       </div>
       <div class="articles">
@@ -42,4 +51,14 @@
         </div>
       </div>
       </div>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+          <ion-icon name="chevron-up-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button  routerLink="../create-article">
+          📝
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
 </ion-content>
