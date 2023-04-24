@@ -15,6 +15,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { CoreModule } from './core/core.module';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule, 
     CoreModule,
     FormsModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebase)), 
     provideAuth(() => getAuth()), 
     provideDatabase(() => getDatabase()), 

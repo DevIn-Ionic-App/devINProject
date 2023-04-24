@@ -17,12 +17,11 @@
         <!-- ========================================= trending articles ============================= -->
       <h3 class="ar-title">Trendings 🔥</h3>
       <div class="scroll-article">
-                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.photo}}');">
-                  <!-- <img src="{{trend.img}}"/> -->
-                  <a routerLink="../article-details">{{trend.title}}</a>
+                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.data.photo}}');">
+                  <a routerLink="../article-details">{{trend.data.title}}</a>
                   <div class="tr-author">
-                    <img src="{{trend.photo}}"/>
-                    <p>author</p>
+                    <img src='{{trend.author.imageUrl}}'/>
+                    <p>{{trend.author.name}}</p>
                   </div>
                 </div>
       </div>
@@ -37,14 +36,14 @@
       </div>
       <div class="articles">
         <div *ngFor="let article of articles">
-          <div class="article" (click)="goToArticleDetails(article.uid)">
-            <img src="{{article.photo}}"/>
+          <div class="article" (click)="goToArticleDetails(article.data.uid)">
+            <img src="{{article.data.photo}}"/>
             <div class="article-data">
-             <a >{{article.title}}</a>
+             <a >{{article.data.title}}</a>
               <div class="article-author">
-                <img src="{{article.photo}}">
-                <p>author</p>
-                <p><span class="date"> 🕑 </span>{{article.date| now}}</p>
+                <img src="{{article.author.imageUrl}}">
+                <p>{{article.author.name}}</p>
+                <p><span class="date"> 🕑 </span>{{article.data.date| now}}</p>
               </div>
             </div>
           </div>

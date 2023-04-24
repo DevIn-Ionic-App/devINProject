@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { SwiperModule } from 'swiper/angular';
 import { HomePageRoutingModule } from './home-routing.module';
-import { NowPipe } from 'app/shared/pipes/now.pipe';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 @NgModule({
@@ -14,8 +14,8 @@ import { NowPipe } from 'app/shared/pipes/now.pipe';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SwiperModule,
+    SharedModule
   ],
-  declarations: [HomePage,NowPipe ]
+  declarations: [HomePage ]
 })
 export class HomePageModule {}

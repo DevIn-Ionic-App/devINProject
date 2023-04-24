@@ -54,9 +54,14 @@ async createArticle(article:any) {
    allArticles = query(collection(this.firestore, "articles"));
    unsubscribe = onSnapshot(this.allArticles, (querySnapshot) => {
   
-  querySnapshot.forEach((doc) => {
-      this.articles.push(doc.data());
-      // console.log(doc.data())
+  querySnapshot.forEach(async(doc) => {
+    let id = doc.data()['authorId']
+    let data = doc.data()
+    let author = await this.profileDetails(id)
+    console.log(author)
+    let article = { author, data}
+    console.log(article)
+      this.articles.push(article);
   });
 });
   //===========================  GET TRENDY ARTICLES: REAL TIME FETCH ================================
@@ -66,25 +71,15 @@ async createArticle(article:any) {
  querySnapshot.forEach(async (doc) => {
      let id = doc.data()['authorId']
       let data = doc.data()
-      let author = await this.findAuthor(id)
+      let author = await this.profileDetails(id)
       console.log(author)
-      // let article = { author, data}
-      // console.log(article)
-    //  this.trendings.push(article);
+      let article = { author, data}
+      console.log(article)
+     this.trendings.push(article);
 
 
  });
 });
-  //===========================  GET AUTHOR DATA : REAL TIME FETCH ================================
-  async findAuthor(id: string): Promise<any> {
-    const getAuthor = query(collection(this.firestore, "authors"), where("id", "==", id));
-    const querySnapshot = await getDocs(getAuthor);
-    let author: any = null;
-    querySnapshot.forEach((doc) => {
-      author = doc.data();
-    });
-    return author;
-  }
 
   // ========================= Get article by id =====================================================
  

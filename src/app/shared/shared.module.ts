@@ -6,12 +6,13 @@ import { NowPipe } from './pipes/now.pipe';
 
 @NgModule({
   declarations: [
-  
+  NowPipe
   ],
   imports: [
     CommonModule
   ],
   exports: [
+    NowPipe
   ]
 })
 export class SharedModule { }

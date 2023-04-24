@@ -23,7 +23,7 @@ export class HomePage implements OnInit{
 
     //============================== GET ALL ARTICLES ======================================
     this.articles = this.articleService.articles;
-    this.trendy = this.articleService.articles;
+    this.trendy = this.articleService.trendings;
     
 }
   //================    logout ===========================

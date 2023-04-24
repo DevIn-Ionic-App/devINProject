@@ -5,16 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ArticleDetailsPageRoutingModule } from './article-details-routing.module';
-import { NowPipe } from 'app/shared/pipes/now.pipe';
 import { ArticleDetailsPage } from './article-details.page';
+import { NowPipe } from 'app/shared/pipes/now.pipe';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ArticleDetailsPageRoutingModule
+    ArticleDetailsPageRoutingModule,
+   SharedModule
   ],
-  declarations: [ArticleDetailsPage,NowPipe]
+  declarations: [ArticleDetailsPage]
 })
 export class ArticleDetailsPageModule {}
