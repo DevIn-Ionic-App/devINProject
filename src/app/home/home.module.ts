@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { SwiperModule } from 'swiper/angular';
 import { HomePageRoutingModule } from './home-routing.module';
+import { NowPipe } from 'app/shared/pipes/now.pipe';
 
 
 @NgModule({
@@ -15,6 +16,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     HomePageRoutingModule,
     SwiperModule,
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,NowPipe ]
 })
 export class HomePageModule {}

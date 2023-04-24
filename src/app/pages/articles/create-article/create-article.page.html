@@ -6,22 +6,23 @@
     <h2 class="title">Create Your Article 📝</h2>  
   </div>
 
-      <form class="add-article" [formGroup]="articleData">
+      <form class="add-article" [formGroup]="articleData" (ngSubmit)="createArticle()">
         <ion-list no-lines class="ion-margin-bottom">
-        <div class="choose-photo">
+        <div *ngIf="!image" class="choose-photo" >
         
           <span>
-            <ion-input
-            placeholder="photo"
-            type="file"
-            accept="image/*"  id="photo" style="display: none;"
-            formControlName="title"
-          ></ion-input>
+            
           <img class='img-icon' src="../../../../assets/icon/icon.png"/>
-          <p>Upload a photo</p>
+          <p (click)="upload()">Upload a photo</p>
           </span>
         </div>
-        <ion-item fill="outline" class="ion-margin-bottom">
+        <div *ngIf="image" class="choosen">
+          <img [src]="image"/>
+          <p (click)="upload()">Change the photo</p>
+
+        </div>
+       <div class="form-inputs">
+        <ion-item fill="" class="ion-margin-bottom">
           <ion-input
             placeholder="Title"
             type="title"
@@ -35,14 +36,14 @@
         </ion-item>
         <ion-list>
           <ion-item>
-            <ion-select aria-label="category" interface="popover" placeholder="Select category">
+            <ion-select aria-label="category" interface="popover" placeholder="Select category"  formControlName="category">
               <ion-select-option value="IT">IT</ion-select-option>
               <ion-select-option value="job&intern">Job & Internship</ion-select-option>
               <ion-select-option value="q&a">Interview Q&A</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
-        <ion-item fill="outline" class="ion-margin-bottom">
+        <ion-item fill="" class="ion-margin-bottom">
           <ion-textarea
             placeholder="Write the content"
             type="content"
@@ -55,6 +56,7 @@
           >
         </ion-item>
         <ion-button expand="full" type="submit" >Publish</ion-button>
+       </div>
       </ion-list></form>
       <br/>
 </ion-content>

@@ -4,7 +4,7 @@
       <ion-searchbar value="" color="light" class="search-bar"></ion-searchbar>
       <ion-list>
         <ion-item>
-          <ion-select aria-label="category" interface="popover" placeholder="Select category">
+          <ion-select aria-label="category" interface="popover" placeholder="category">
             <ion-select-option value="IT">IT</ion-select-option>
             <ion-select-option value="job&intern">Job & Internship</ion-select-option>
             <ion-select-option value="q&a">Interview Q&A</ion-select-option>
@@ -17,11 +17,11 @@
         <!-- ========================================= trending articles ============================= -->
       <h3 class="ar-title">Trendings 🔥</h3>
       <div class="scroll-article">
-                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.img}}');">
+                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.photo}}');">
                   <!-- <img src="{{trend.img}}"/> -->
                   <a routerLink="../article-details">{{trend.title}}</a>
                   <div class="tr-author">
-                    <img src="{{trend.img}}"/>
+                    <img src="{{trend.photo}}"/>
                     <p>author</p>
                   </div>
                 </div>
@@ -38,13 +38,13 @@
       <div class="articles">
         <div *ngFor="let article of articles">
           <div class="article">
-            <img src="{{article.img}}"/>
+            <img src="{{article.photo}}"/>
             <div class="article-data">
              <a routerLink="../article-details">{{article.title}}</a>
               <div class="article-author">
-                <img src="{{article.img}}">
+                <img src="{{article.photo}}">
                 <p>author</p>
-                <p><span> 🕑</span> 15 hour</p>
+                <p><span class="date"> 🕑 </span>{{article.date| now}}</p>
               </div>
             </div>
           </div>

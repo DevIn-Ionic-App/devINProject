@@ -7,8 +7,9 @@ import * as moment from 'moment';
 export class NowPipe implements PipeTransform {
 
   transform(value: any): string {
+    const timestamp = value.toDate();
     const now = moment();
-    const date = moment(value);
+    const date = moment(timestamp);
     const diff = moment.duration(now.diff(date));
 
     if (diff.asSeconds() < 60) {

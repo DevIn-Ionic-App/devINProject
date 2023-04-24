@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserService } from 'app/shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
     private loadingController:LoadingController,
     private alertController:AlertController,
     private authService:AuthService,
-    private router:Router) { }
+    private router:Router,
+    private userService:UserService) { }
 
     get email(){
       return this.credentials.get('email');
@@ -52,6 +54,8 @@ async login(){
 
   }
   else{
+    
+    this.userService.userId = user.user.uid
     this.router.navigateByUrl('/home',{replaceUrl:true});
 
   }

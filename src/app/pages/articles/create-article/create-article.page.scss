@@ -8,6 +8,8 @@
           align-self: center;
           margin-left: 20px;
           margin-top: 10px;
+          cursor: pointer;
+
         }
     .title{
         width: 100%;
@@ -44,9 +46,27 @@
             text-align: center;
             font-size: 1.2rem;
             font-weight: 600;
+            cursor: pointer;
         }}
     }
-     ion-list ion-item, ion-list ion-list{
+    .choosen{
+         height:300px;
+        width: 90%;
+        margin:20px auto;
+       img{
+        border-radius:15px;
+       }
+       p{
+        margin:10px auto;
+        color: var(--dgreen);
+        text-align: center;
+        cursor: pointer;
+
+       }
+    }
+    .form-inputs{
+        margin-top:20px;
+        ion-list ion-item, ion-list ion-list{
       margin-top: 10px;
      }
      ion-list ion-textarea{
@@ -54,5 +74,5 @@
      }
      ion-button{
         margin-top: 20px;
-        --background: var(--dgreen)
+        --background: var(--dgreen)}
      }}

@@ -3,8 +3,8 @@ import { UserService } from 'app/shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from 'app/shared/models/article.model';
-import SwiperCore, {Pagination, SwiperOptions} from 'swiper';
-SwiperCore.use([Pagination])
+import { ArticleService } from 'app/shared/services/article.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,129 +13,24 @@ SwiperCore.use([Pagination])
 export class HomePage implements OnInit{
 
   profile=null;
- //=============================== swiper ===========================
-config: SwiperOptions = {
-  slidesPerView: 2,
-  spaceBetween: 50,
-  // navigation: true,
-  // pagination: { clickable: true },
-  scrollbar:{ draggable: true }
 
-};
   constructor(private authService: AuthService,
-    private router:Router, private userService: UserService) {}
+    private router:Router, private userService: UserService, private articleService: ArticleService) {}
   //================  articles ====================
-  trendy!: Article[];
-  articles!: Article[];
+  trendy!:any;
+  articles: any;
   ngOnInit(): void {
-    this.trendy =[
-      {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },
-      {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },    
-      {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },   
-       
-      //  { title: 'New research has shown that while',
-      //   authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-      //   date:new Date(2023, 3, 15, 12, 30, 0, 0),
-      //   content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-      //   likes :200,
-      //   saves : 100,
-      //   img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-      //   category:"IT"
-      // },    {
-      //   title: 'New research has shown that while',
-      //   authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-      //   date:new Date(2023, 3, 15, 12, 30, 0, 0),
-      //   content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-      //   likes :200,
-      //   saves : 100,
-      //   img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-      //   category:"IT"
-      // },
-    ]
-    this.articles =[
-      {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },
-      {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },    {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },    {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },    {
-        title: 'New research has shown that while',
-        authorId: 'KfXxsRYiaYhThcJCUbX1pfvQRgE3',
-        date:new Date(2023, 3, 15, 12, 30, 0, 0),
-        content: 'New research has shown that while the use of immersive virtual reality (IVR) increases student enjoyment and presence in a task, when used on its own it does not improve procedural or declarative knowledge when compared to the more traditional learning activity of watching a video.',
-        likes :200,
-        saves : 100,
-        img:"https://kenzie.snhu.edu/wp-content/uploads/2020/11/AdobeStock_241083104-540x420.jpg",
-        category:"IT"
-      },
-    ]
+
+    //============================== GET ALL ARTICLES ======================================
+    this.articles = this.articleService.articles;
+    this.trendy = this.articleService.articles;
 }
   //================    logout ===========================
   logout(){
     this.authService.logout();
     this.router.navigateByUrl('/',{replaceUrl:true});
   }
-  //============================
- 
-  user = this.userService.getUserById("sqLUtIGYCKS2jUWHfqc3nUHULJ32")
+
+  
   
 }

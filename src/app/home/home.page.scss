@@ -57,21 +57,24 @@ ion-content.home{
     .scroll-article{
       display: flex;
       flex-wrap: nowrap;
-    
-      height:320px;
+       position: relative;
+       z-index: 3;
+      height:340px;
       overflow-x: auto; 
+      // overflow-y: visible;
       &::-webkit-scrollbar{
         width:0;
       }
       .tr{
         position: relative;
         flex: 0 0 auto;
-        height:300px;
+        height:280px;
         width: 180px;
         padding: 20px  0px;
         margin-right: 20px;
         box-shadow: 2px 28px 27px -14px rgba(33,46,37,0.76);
         border-radius: 10px;
+       
 
         a{
           position: absolute;
@@ -83,9 +86,15 @@ ion-content.home{
           font-weight: 400;
           font-size: 1.1rem;
           inline-size: 150px;
-           overflow-wrap: break-word;
+          height: var(--element-height);           /* <------ optional */
+          text-overflow: ellipsis;                 /* <------ required */
+          line-height: var(--line-height);         /* <------ optional */
+          overflow: hidden;                        /* <------ required */
+          display: -webkit-box;                    /* <------ required */
+          -webkit-line-clamp: var(--lines-count);  /* <------ required */
+          -webkit-box-orient: vertical;          
            text-decoration: none;
-
+           text-shadow: 1.5px 1.5px 1px rgba(1, 0, 0, 0.3);
 
         }
         .tr-author{
@@ -103,11 +112,15 @@ ion-content.home{
             border-radius: 25px;
             margin-right: 10px;
             border: 1px solid white;
+            box-shadow: 1.5px 1.5px 1px rgba(1, 0, 0, 0.3);
+
           }
           p{
             color: white;
             font-size: .9rem;
             font-weight: 400;
+            text-shadow: 1.5px 1.5px 1px rgba(1, 0, 0, 0.3);
+
           }
         }
       }
@@ -130,6 +143,7 @@ ion-content.home{
           display: inline-block;
           color:gray;
           margin:0 40px;
+          cursor: pointer;
 
 
         }
@@ -173,6 +187,7 @@ ion-content.home{
           color:var(--gray);
 
         }
+        
         .article-author{
           display: flex;
           align-items: center;
@@ -187,6 +202,9 @@ ion-content.home{
             margin-right:5px;
             border-radius: 25px;
   
+          }
+          .date{
+          margin-left : 10px
           }
         }
       }

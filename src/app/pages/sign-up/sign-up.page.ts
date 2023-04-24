@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserService } from 'app/shared/services/user.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +18,8 @@ export class SignUpPage implements OnInit {
     private loadingController:LoadingController,
     private alertController:AlertController,
     private authService:AuthService,
-    private router:Router) { }
+    private router:Router,
+    private userService:UserService) { }
  
     get email(){
       return this.credentials.get('email');
@@ -59,7 +61,8 @@ async register(){
   else{
     const name= this.credentials.value.name;
     const email= this.credentials.value.email;
-    this.authService.addUser(name,email, user.user.uid )
+    this.authService.addUser(name,email, user.user.uid );
+    this.userService.userId = user.user.uid
     this.router.navigateByUrl('/home',{replaceUrl:true});
   }
 }

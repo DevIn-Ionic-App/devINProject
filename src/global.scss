@@ -36,7 +36,9 @@
     --lblue:#049BB1;
     --lgreen:#50c878;
     --gray:#434343;
-
+    --lines-count: 3;
+    --line-height: 30px;
+    --element-height: calc(var(--lines-count) * var(--line-height));
 
 }
 *{
