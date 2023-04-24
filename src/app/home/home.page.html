@@ -16,9 +16,9 @@
       <div class="home-content">
         <!-- ========================================= trending articles ============================= -->
       <h3 class="ar-title">Trendings 🔥</h3>
-      <div class="scroll-article">
-                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.data.photo}}');">
-                  <a routerLink="../article-details">{{trend.data.title}}</a>
+      <div class="scroll-article" >
+                <div class="tr"  *ngFor="let trend of trendy" style="background-image: url('{{trend.data.photo}}');" (click)="goToArticleDetails(trend.data.uid)">
+                  <a >{{trend.data.title}}</a>
                   <div class="tr-author">
                     <img src='{{trend.author.imageUrl}}'/>
                     <p>{{trend.author.name}}</p>
