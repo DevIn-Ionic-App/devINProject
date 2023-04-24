@@ -1,25 +1,23 @@
 <ion-content>
-  <div class="article-details">
+  <div class="article-details" *ngIf="articleDet" >
     <div class="image-wrapper">
-      <img class="glassy-effect" src="../../../assets/images/detail1.jpg" />
+      <img class="glassy-effect" src="{{articleDet?.photo}}" />
       <div class="back-save">
-        <div class="back-cercle" routerLink="../home"><i class="fa-solid fa-arrow-left"></i></div>
+        <div class="back-cercle" routerLink="../../home"><i class="fa-solid fa-arrow-left"></i></div>
         <div class="save"><i class="fa-regular fa-bookmark"></i></div>
         
       </div>
       <div class="author-details">
-        <img class="author-image" src="../../../assets/images/professionnalWoman.jpg" />
-        <div class="author-name">@Ghiz</div>
-        <div class="article-time"><i class="fas fa-clock"></i> 2 hours</div>
+        <img class="author-image" src="{{profileDet?.imageUrl}}" />
+        <div class="author-name">@{{profileDet?.name}}</div>
+        <div class="article-time" ><i class="fas fa-clock"></i> {{articleDet?.date| now}}</div>
       </div>
       
-      <h1 class="article-title">The evolution of software development orchestration: current state and an agenda for future research</h1>
+      <h1 class="article-title">{{ articleDet?.title }}</h1>
     </div>
     <div class="description-wrapper">
       <div class="description">
-        In a provocatively titled opinion editorial in the Wall Street Journal – “Why Software is Eating the World” – former Netscape co-founder turned venture capitalist Marc Andreessen enumerated a range of industries that were being upended by software and software-powered technology models (Andreessen, Citation2011). Indeed the period immediately preceding the opinion editorial’s publication saw the emergence of foundational technologies including cloud computing, the Internet of Things (IoT), and application programming interfaces (APIs). The decade since has seen the rise of digital platforms, software-as-a-service (Saas), and blockchains as well as a resurgence of artificial intelligence, each facilitated by one or another of these foundational technologies. Powered by software, these developments have led to transformations in industries as varied as education (with the rise of MOOCs), entertainment (with the rise of digital streaming), financial services (with the rise of mobile payments, cryptocurrencies, and crowdfunding), pharmaceuticals (with the rise of algorithmically driven drug discovery), real estate (with the rise of short-term rental and co-working spaces), mobility (with the rise of ride-sharing), and agriculture (with the rise of agtech) among many others. There is little doubt that these software-powered technologies and business models have impacted the personal and work lives of many.
-
-Information systems (IS) scholars took notice of these transformations and the community devoted itself to making sense of their impacts on business and society. Indeed, over the past decade, research topics such as digital platforms, fintech, social media, and mobile marketing have taken centre stage in the discipline’s prominent scholarly journals. For instance, numerous empirical studies have focused on digital platforms and their impact on firm organising (e.g., Ghazawneh & Henfridsson, Citation2013; Parker et al., Citation2017), innovation activity (e.g., Fayard et al., Citation2016; Majchrzak & Malhotra, Citation2016), societal health, and well-being (e.g., Chan & Ghose, Citation2014; Greenwood & Wattal, Citation2017), and peer-to-peer lending (e.g., Burtch et al., Citation2013). IS scholars’ engagement with these phenomena has been welcome, lending tremendous insight and advancing the discipline’s cumulative body of knowledge about the new ways in which software-powered technologies are affecting business and society.
+        {{articleDet?.content}}
       </div>
       <div class="likes-comments">
         <div class="likes"><i class="fa-solid fa-heart" style="color: #ca0202;"></i><br>120</div>

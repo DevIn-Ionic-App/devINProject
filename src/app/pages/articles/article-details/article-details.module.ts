@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ArticleDetailsPageRoutingModule } from './article-details-routing.module';
-
+import { NowPipe } from 'app/shared/pipes/now.pipe';
 import { ArticleDetailsPage } from './article-details.page';
 
 @NgModule({
@@ -15,6 +15,6 @@ import { ArticleDetailsPage } from './article-details.page';
     IonicModule,
     ArticleDetailsPageRoutingModule
   ],
-  declarations: [ArticleDetailsPage]
+  declarations: [ArticleDetailsPage,NowPipe]
 })
 export class ArticleDetailsPageModule {}

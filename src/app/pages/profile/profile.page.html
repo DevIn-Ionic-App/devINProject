@@ -1,11 +1,11 @@
 
 
 <ion-content>
-  <form>
-   <div class="profile">
+  <form #f="ngForm" (ngSubmit)="updateProfile()">
+   <div class="profile" *ngIf="userF?.email">
     <div class="back-save">
       <div class="back-cercle" routerLink="../home"><i class="fa-solid fa-angles-left" style="color: #000;"></i></div>
-      <div class="save" routerLink="../login"><i class="fa-solid fa-right-from-bracket" style="color: #fd3030;"></i></div>
+      <div class="save" (click)="logout()"><i class="fa-solid fa-right-from-bracket" style="color: #fd3030;"></i></div>
       
     </div>
     <div class="edit_profile">
@@ -14,34 +14,36 @@
      
       <div class="image-container">
         <input type="file" accept="image/*"  id="image-input" style="display: none;">
-        <img class="profile-image"  src="../../../assets/images/professionnalWoman.jpg" />
-        <ion-icon name="camera" class="camera-icon" (click)="onCameraClick()" ></ion-icon>
+        <img *ngIf="userF.imageUrl" class="profile-image"  [src]="userF.imageUrl" />
+        <img *ngIf="!userF.imageUrl" class="profile-image"  src="../../../assets/images/avatar.jpg!bg" />
+        <ion-icon name="camera" class="camera-icon" (click)="takePicture()" ></ion-icon>
       </div>
     </div>
-  <div class="inputs">
-    <ion-item>
-      <ion-label position="stacked">Username</ion-label>
-      <ion-input type="text" name="username"></ion-input>
-    </ion-item>
+    <div class="inputs" >
+      <ion-item>
+        <ion-label position="stacked">Username</ion-label>
+        <ion-input type="text" name="name" class="form-control" [(ngModel)]="userF.name"></ion-input>
+      </ion-item>
+    
 
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input type="email" name="email" readonly value="ghizlanekassimi8@gmail.com"></ion-input>
+      <ion-input type="email" name="email" class="form-control"  readonly [(ngModel)]="userF.email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input type="password" name="password"></ion-input>
+      <ion-input type="password" name="password" class="form-control"[(ngModel)]="password" ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Bio</ion-label>
-      <ion-textarea name="bio"></ion-textarea>
+      <ion-textarea name="bio" [(ngModel)]="userF.bio" class="form-control"  ></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Gender</ion-label>
-      <ion-select name="gender">
+      <ion-select name="gender" class="form-control"   [(ngModel)]="userF.gender">
         <ion-select-option value="male">Male</ion-select-option>
         <ion-select-option value="female">Female</ion-select-option>
       </ion-select>
@@ -49,15 +51,15 @@
 
     <ion-item>
       <ion-label position="stacked">Specialty</ion-label>
-      <ion-input type="text" name="specialty"></ion-input>
+      <ion-input type="text" class="form-control"  name="speciality" [(ngModel)]="userF.speciality" ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Country</ion-label>
-      <ion-input type="text" name="country"></ion-input>
+      <ion-input type="text" name="country" class="form-control"  [(ngModel)]="userF.country"></ion-input>
     </ion-item>
 
-    <ion-button type="submit" expand="block">Save</ion-button>
+    <ion-button type="submit" expand="block" >Save</ion-button>
   </div>
 </div>
   </form>

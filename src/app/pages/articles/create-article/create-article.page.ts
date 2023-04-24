@@ -17,7 +17,7 @@ import { UserService } from 'app/shared/services/user.service';
   styleUrls: ['./create-article.page.scss'],
 })
 export class CreateArticlePage implements OnInit {
-
+  uid:any
   articleData!: FormGroup;
   constructor(private fb:FormBuilder,
     private loadingController:LoadingController,
@@ -38,17 +38,19 @@ export class CreateArticlePage implements OnInit {
       })
       await alert.present();
   }
+  
   ngOnInit() {
     this.articleData = this.fb.group({
-      title :['', [Validators.required]],
-      photo :['', [Validators.required]],
-      content :['', [Validators.required]],
-      category :['', [Validators.required]],
-      date :['', [Validators.required]],
-      authorId :['', [Validators.required]],
-
-
+      title: ['', [Validators.required]],
+      photo: ['', [Validators.required]],
+      content: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+     
     });
+  
+    
+    
   }
   //========================== upload photo=====================================
   image : any

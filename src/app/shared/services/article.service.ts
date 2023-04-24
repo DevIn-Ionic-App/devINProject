@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore,  addDoc, collectionData, } from '@angular/fire/firestore';
+import { Firestore,  addDoc, collectionData, setDoc, } from '@angular/fire/firestore';
+import { AuthService } from 'app/core/auth.service';
 import { collection, query, where, onSnapshot, getDocs, getDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 
@@ -8,32 +9,39 @@ import { doc } from "firebase/firestore";
   providedIn: 'root'
 })
 export class ArticleService {
-
-  constructor(private firestore: Firestore,
- ) { }
+id:any
+  constructor(private firestore: Firestore, private as: AuthService
+ ) { 
+  this.as.user.subscribe(user => {
+    if (user) {
+     
+      console.log('author id:', user.uid); // Debugging line
+      this.id=user.uid
+    }
+  });
+ }
  articles:any = [];
  trendings :any = []
  twentyFourHoursAgo = new Date(Date.now() - (24 * 60 * 60 * 1000));
  author :any
 //====================================== CREATE ARTICLE ===========================================
-     async createArticle(article:any){
-    
-    
-      const collectionInstance = collection(this.firestore, 'articles');
-      try{
-        addDoc(collectionInstance, article).then(()=>{
-        
- 
-       }).catch(()=>{
-         
-         throw null
-               })
-       return true;
-      }
-      catch(e){
-        throw null
-      }
-    }
+async createArticle(article:any) {
+  try {
+    const collectionInstance = collection(this.firestore, 'articles');
+    const docRef = doc(collectionInstance); // Create a new document reference with a unique ID
+    const articleData = {
+      ...article,
+      uid: docRef.id, // Add the UID to the document data
+      authorId:this.id
+    };
+    await setDoc(docRef, articleData); // Use setDoc() to add the document to Firestore
+    return true;
+  } catch (e) {
+    console.error("Error adding document: ", e);
+    throw null;
+  }
+}
+
   //================================= GET ALL ARTICLES ===============================================
    getAllArticles(){
 
@@ -77,6 +85,45 @@ export class ArticleService {
     });
     return author;
   }
-  
+
+  // ========================= Get article by id =====================================================
+ 
+
+
+async articleDetails(uid: string | null): Promise<any> {
+  try {
+    const getArticle = query(collection(this.firestore, "articles"), where("uid", "==", uid));
+    const querySnapshot = await getDocs(getArticle);
+    let article: any = null;
+    querySnapshot.forEach((doc) => {
+      article = doc.data();
+    });
+    if (!article) {
+      throw new Error("Article not found");
+    }
+    return article;
+  } catch (e) {
+    console.error("Error fetching article: ", e);
+    throw null;
+  }
+}
+  // ========================= Get Profile by id =====================================================
+  async profileDetails(uid: string | null): Promise<any> {
+  try {
+    const getProfile = query(collection(this.firestore, "users"), where("id", "==", uid));
+    const querySnapshot = await getDocs(getProfile);
+    let profile: any = null;
+    querySnapshot.forEach((doc) => {
+      profile = doc.data();
+    });
+    if (!profile) {
+      throw new Error("Profile not found");
+    }
+    return profile;
+  } catch (e) {
+    console.error("Error fetching article: ", e);
+    throw null;
+  }
+}
 
 }

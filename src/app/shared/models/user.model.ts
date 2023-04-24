@@ -2,8 +2,10 @@ export interface User {
     id: string;
     name: string;
     email: string;
-    photoUrl: string;
+    password:string;
+    imageUrl: string;
     bio: string;
     speciality:string;
     country:string;
+    gender:string;
 }

@@ -13,6 +13,8 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { CoreModule } from './core/core.module';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,12 +24,14 @@ import { CoreModule } from './core/core.module';
     IonicModule.forRoot(), 
     AppRoutingModule, 
     CoreModule,
+    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)), 
     provideAuth(() => getAuth()), 
     provideDatabase(() => getDatabase()), 
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage())],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

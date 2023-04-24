@@ -24,13 +24,16 @@ export class HomePage implements OnInit{
     //============================== GET ALL ARTICLES ======================================
     this.articles = this.articleService.articles;
     this.trendy = this.articleService.articles;
+    
 }
   //================    logout ===========================
   logout(){
     this.authService.logout();
     this.router.navigateByUrl('/',{replaceUrl:true});
   }
-
+  goToArticleDetails(id: string) {
+    this.router.navigate(['/article-details', id]);
+  }
   
   
 }

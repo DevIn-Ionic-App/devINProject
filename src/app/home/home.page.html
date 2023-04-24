@@ -37,10 +37,10 @@
       </div>
       <div class="articles">
         <div *ngFor="let article of articles">
-          <div class="article">
+          <div class="article" (click)="goToArticleDetails(article.uid)">
             <img src="{{article.photo}}"/>
             <div class="article-data">
-             <a routerLink="../article-details">{{article.title}}</a>
+             <a >{{article.title}}</a>
               <div class="article-author">
                 <img src="{{article.photo}}">
                 <p>author</p>

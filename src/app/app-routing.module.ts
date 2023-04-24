@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/firstpage/firstpage.module').then( m => m.FirstpagePageModule)
   },
   {
-    path: 'article-details',
+    path: 'article-details/:id',
     loadChildren: () => import('./pages/articles/article-details/article-details.module').then( m => m.ArticleDetailsPageModule)
   },
   {
