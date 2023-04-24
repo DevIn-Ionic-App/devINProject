@@ -1,10 +1,11 @@
 <ion-content>
   <div class="article-details" *ngIf="articleDet" >
     <div class="image-wrapper">
+      <div class="overlay">
       <img class="glassy-effect" src="{{articleDet?.photo}}" />
       <div class="back-save">
         <div class="back-cercle" routerLink="../../home"><i class="fa-solid fa-arrow-left"></i></div>
-        <div class="save"><i class="fa-regular fa-bookmark"></i></div>
+        <div class="save" (click)="SaveArticle()"><i class="{{iconSave}}"></i></div>
         
       </div>
       <div class="author-details">
@@ -15,12 +16,13 @@
       
       <h1 class="article-title">{{ articleDet?.title }}</h1>
     </div>
+    </div>
     <div class="description-wrapper">
       <div class="description">
         {{articleDet?.content}}
       </div>
       <div class="likes-comments">
-        <div class="likes"><i class="fa-solid fa-heart" style="color: #ca0202;"></i><br>120</div>
+        <div class="likes" id='likes' (click)="LikeArticle()"><i class="fa-solid fa-heart" id ='iconlikes' style="color: #ca0202;"></i><br>{{nblikes}}</div>
         <div class="comments" (click)="showComments()"><i class="fa-solid fa-comment" style="color: #000000;"></i><br> 10</div>
       </div>
     </div>
