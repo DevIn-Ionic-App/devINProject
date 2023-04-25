@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore,  addDoc, collectionData, setDoc, } from '@angular/fire/firestore';
+import { Firestore,  addDoc, collectionData, docData, setDoc, } from '@angular/fire/firestore';
 import { AuthService } from 'app/core/auth.service';
 import { collection, query, where, onSnapshot, getDocs, getDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
@@ -21,7 +21,8 @@ id:any
   });
  }
  articles:any = [];
- trendings :any = []
+ trendings :any = [];
+ liked : any = [];
  twentyFourHoursAgo = new Date(Date.now() - (24 * 60 * 60 * 1000));
  author :any
 //====================================== CREATE ARTICLE ===========================================
@@ -61,15 +62,15 @@ async createArticle(article:any) {
    console.log(author)
    let article = { author, data}
    //console.log(article)
-     //this.articles.push(article);
+     //this.articles.unshift(article);
        // Check if the article already exists in the array
    const index = this.articles.findIndex((existingArticle: { data: { uid: any; }; }) => {
      return existingArticle.data.uid === article.data['uid'];
    });
 
    if (index === -1) {
-     // If the article doesn't exist, push it to the array
-     this.articles.push(article);
+     // If the article doesn't exist, unshift it to the array
+     this.articles.unshift(article);
    } else {
      // If the article already exists, replace it with the updated version
      this.articles[index] = article;
@@ -86,8 +87,17 @@ async createArticle(article:any) {
       let author = await this.profileDetails(id)
       console.log(author)
       let article = { author, data}
-      console.log(article)
-     this.trendings.push(article);
+      const index = this.trendings.findIndex((existingArticle: { data: { uid: any; }; }) => {
+        return existingArticle.data.uid === article.data['uid'];
+      });
+   
+      if (index === -1) {
+        // If the article doesn't exist, unshift it to the array
+        this.trendings.unshift(article);
+      } else {
+        // If the article already exists, replace it with the updated version
+        this.trendings[index] = article;
+      }
 
 
  });
@@ -132,5 +142,32 @@ async articleDetails(uid: string | null): Promise<any> {
     throw null;
   }
 }
+//============================= GET LIKED ARTICLES ===============================
+likedArticles(id:string) {
+  const Like = query(collection(this.firestore, "likes"), where("idAuthor","==",id));
+  const unsubscribe3 = onSnapshot(Like, (querySnapshot) => {
 
+querySnapshot.forEach(async (doc) => {
+   let id = doc.data()['authorId']
+    let data = doc.data()
+    let author = await this.profileDetails(id)
+    console.log(author)
+    let article = { author, data}
+    const index = this.trendings.findIndex((existingArticle: { data: { uid: any; }; }) => {
+      return existingArticle.data.uid === article.data['uid'];
+    });
+ 
+    if (index === -1) {
+      // If the article doesn't exist, unshift it to the array
+      this.trendings.unshift(article);
+    } else {
+      // If the article already exists, replace it with the updated version
+      this.trendings[index] = article;
+    }
+
+
+});
+});
+
+ }
 }
