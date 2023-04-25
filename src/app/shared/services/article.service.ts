@@ -51,18 +51,30 @@ async createArticle(article:any) {
     return  collectionData(collectionInstance);
   }
   //===========================  GET ALL ARTICLES: REAL TIME FETCH ================================
-   allArticles = query(collection(this.firestore, "articles"));
-   unsubscribe = onSnapshot(this.allArticles, (querySnapshot) => {
-  
-  querySnapshot.forEach(async(doc) => {
-    let id = doc.data()['authorId']
-    let data = doc.data()
-    let author = await this.profileDetails(id)
-    console.log(author)
-    let article = { author, data}
-    console.log(article)
-      this.articles.push(article);
-  });
+  allArticles = query(collection(this.firestore, "articles"));
+  unsubscribe = onSnapshot(this.allArticles, (querySnapshot) => {
+ 
+ querySnapshot.forEach(async(doc) => {
+   let id = doc.data()['authorId']
+   let data = doc.data()
+   let author = await this.profileDetails(id)
+   console.log(author)
+   let article = { author, data}
+   //console.log(article)
+     //this.articles.push(article);
+       // Check if the article already exists in the array
+   const index = this.articles.findIndex((existingArticle: { data: { uid: any; }; }) => {
+     return existingArticle.data.uid === article.data['uid'];
+   });
+
+   if (index === -1) {
+     // If the article doesn't exist, push it to the array
+     this.articles.push(article);
+   } else {
+     // If the article already exists, replace it with the updated version
+     this.articles[index] = article;
+   }
+ });
 });
   //===========================  GET TRENDY ARTICLES: REAL TIME FETCH ================================
   trend = query(collection(this.firestore, "articles"), where("date",">=",this.twentyFourHoursAgo));

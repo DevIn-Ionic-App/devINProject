@@ -1,5 +1,9 @@
-<ion-content>
-  <div class="article-details" *ngIf="articleDet" >
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+<ion-content  *ngIf="!isLoading">
+ 
+  <div class="article-details" >
     <div class="image-wrapper">
       <div class="overlay">
       <img class="glassy-effect" src="{{articleDet?.photo}}" />
@@ -9,7 +13,8 @@
         
       </div>
       <div class="author-details">
-        <img class="author-image" src="{{profileDet?.imageUrl}}" />
+        <img class="author-image" *ngIf="profileDet?.imageUrl" src="{{profileDet?.imageUrl}}" />
+        <img class="author-image" *ngIf="!profileDet?.imageUrl" src="../../../../assets/images/avatar.jpg!bg" />
         <div class="author-name">@{{profileDet?.name}}</div>
         <div class="article-time" ><i class="fas fa-clock"></i> {{articleDet?.date| now}}</div>
       </div>

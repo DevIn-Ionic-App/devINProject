@@ -1,6 +1,8 @@
 
-
-<ion-content>
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+<ion-content *ngIf="!isLoading">
   <form #f="ngForm" (ngSubmit)="updateProfile()">
    <div class="profile" *ngIf="userF?.email">
     <div class="back-save">

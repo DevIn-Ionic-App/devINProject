@@ -21,6 +21,7 @@ export class ProfilePage implements OnInit {
   password ?:any
   userinfo: any
   userF:any
+  isLoading:boolean=true
   constructor(
     private firestore: Firestore,
     private storage: Storage,
@@ -31,6 +32,7 @@ export class ProfilePage implements OnInit {
 
   
   ngOnInit() {
+    console.log("this is profile")
     this.as.user.subscribe(user =>{
       this.userinfo=user
 this.uid =user?.uid;
@@ -68,7 +70,8 @@ this.uid =user?.uid;
         console.log(this.userF);
       }
       
-    });  
+    }); 
+    this.isLoading=false 
   }
 
 

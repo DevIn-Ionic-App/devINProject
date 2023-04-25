@@ -50,7 +50,7 @@ async login(){
   await loading.dismiss();
 
   if(user== null){
-    this.showAlert('Login failed', 'Please try again later!')
+    this.showAlert('Login failed', 'Login or Password wrong!')
 
   }
   else{

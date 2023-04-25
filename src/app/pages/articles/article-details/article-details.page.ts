@@ -22,6 +22,7 @@ clicked:any = false
 clickedSave:any = false
 profileDet:any
 uid:any
+isLoading: boolean = true;
 iconSave:any="fa-regular fa-bookmark"
   constructor(private modalController: ModalController,
     private route: ActivatedRoute,
@@ -47,7 +48,7 @@ iconSave:any="fa-regular fa-bookmark"
       this.uid =user?.uid;
       
           })
-    
+          console.log(this.isLoading)
     this.idarticle = id;
     try {
       this.likedornot =  this.likesService.LikedOrNot(this.idarticle,this.uid)
@@ -79,6 +80,8 @@ if(this.likedornot>0){
     } catch (e) {
       console.error("Error fetching article: ", e);
     }
+    this.isLoading=false
+    console.log(this.isLoading)
   }
  
  

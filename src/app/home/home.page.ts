@@ -13,12 +13,16 @@ import * as moment from 'moment';
 export class HomePage implements OnInit{
 
   profile=null;
+  searchTerm: string='';
+  selectedCategory: string = '';
+
+
 
   constructor(private authService: AuthService,
     private router:Router, private userService: UserService, private articleService: ArticleService) {}
   //================  articles ====================
   trendy!:any;
-  articles: any;
+  articles: any|null;
   ngOnInit(): void {
 
     //============================== GET ALL ARTICLES ======================================
@@ -26,11 +30,36 @@ export class HomePage implements OnInit{
     this.trendy = this.articleService.trendings;
     
 }
+
   //================    logout ===========================
-  logout(){
-    this.authService.logout();
-    this.router.navigateByUrl('/',{replaceUrl:true});
+  get filteredArticles() {
+    let filtered = this.articles; // start with all articles
+    
+    // apply search filter
+    if (!this.searchTerm.trim()) {
+      // if search term is empty or whitespace, return all articles
+      console.log("Search term is empty or whitespace. Showing all articles.");
+    } else {
+      // filter articles that match the search term
+      filtered = this.articles.filter((article: { data: { title: string; }; }) =>
+        article.data.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      console.log("Showing articles that match search term:", this.searchTerm);
+    }
+  
+    // apply category filter
+    if (this.selectedCategory && this.selectedCategory !== "ALL") {
+      filtered = filtered.filter((article: { data: { category: string; }; }) => {
+        return article.data.category === this.selectedCategory;
+      });
+      console.log("Showing articles in category:", this.selectedCategory);
+    } else {
+      console.log("Showing articles in all categories.");
+    }
+  
+    return filtered;
   }
+  
   goToArticleDetails(id: string) {
     this.router.navigate(['/article-details', id]);
   }

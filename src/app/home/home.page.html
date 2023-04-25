@@ -1,10 +1,11 @@
 <ion-content class="home" >
      <div class="home-header">
 
-      <ion-searchbar value="" color="light" class="search-bar"></ion-searchbar>
+      <ion-searchbar [(ngModel)]="searchTerm" color="light" class="search-bar" ></ion-searchbar>
       <ion-list>
         <ion-item>
-          <ion-select aria-label="category" interface="popover" placeholder="category">
+          <ion-select  [(ngModel)]="selectedCategory" aria-label="category" interface="popover" placeholder="ALL" >
+            <ion-select-option value="ALL" selected>ALL</ion-select-option>
             <ion-select-option value="IT">IT</ion-select-option>
             <ion-select-option value="job&intern">Job & Internship</ion-select-option>
             <ion-select-option value="q&a">Interview Q&A</ion-select-option>
@@ -35,7 +36,7 @@
         </ul>
       </div>
       <div class="articles">
-        <div *ngFor="let article of articles">
+        <div *ngFor="let article of filteredArticles">
           <div class="article" (click)="goToArticleDetails(article.data.uid)">
             <img src="{{article.data.photo}}"/>
             <div class="article-data">
