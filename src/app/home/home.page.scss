@@ -21,7 +21,18 @@
 
   margin: 0;
 }
-
+.spinner{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ion-spinner {
+  width: 40px;
+  height: 40px;
+  stroke: #444;
+  fill: #222;
+}
 #container a {
   text-decoration: none;
 }

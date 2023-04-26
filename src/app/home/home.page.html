@@ -1,4 +1,7 @@
-<ion-content class="home" >
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+<ion-content class="home" *ngIf="!isLoading">
      <div class="home-header">
 
       <ion-searchbar [(ngModel)]="searchTerm" color="light" class="search-bar" ></ion-searchbar>

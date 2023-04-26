@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Article } from 'app/shared/models/article.model';
 import { ArticleService } from 'app/shared/services/article.service';
 import * as moment from 'moment';
+import { CommentsService } from 'app/shared/services/comments.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,11 +16,11 @@ export class HomePage implements OnInit{
   profile=null;
   searchTerm: string='';
   selectedCategory: string = '';
-
+  isLoading:boolean=true;
 
 
   constructor(private authService: AuthService,
-    private router:Router, private userService: UserService, private articleService: ArticleService) {}
+    private router:Router, private userService: UserService,private commentService:CommentsService, private articleService: ArticleService) {}
   //================  articles ====================
   trendy!:any;
   articles: any|null;
@@ -28,7 +29,7 @@ export class HomePage implements OnInit{
     //============================== GET ALL ARTICLES ======================================
     this.articles = this.articleService.articles;
     this.trendy = this.articleService.trendings;
-    
+    this.isLoading=false
 }
 
   //================    logout ===========================
@@ -60,7 +61,9 @@ export class HomePage implements OnInit{
     return filtered;
   }
   
-  goToArticleDetails(id: string) {
+  async goToArticleDetails(id: string) {
+    await  this.commentService.setData(id);
+      console.log("it's set",id)
     this.router.navigate(['/article-details', id]);
   }
   
