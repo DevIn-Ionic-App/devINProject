@@ -12,22 +12,31 @@ import * as moment from 'moment';
 })
 export class HomePage implements OnInit{
 
-  profile=null;
+  
   searchTerm: string='';
   selectedCategory: string = '';
-
+  userPhotoUrl :string = '';
 
 
   constructor(private authService: AuthService,
-    private router:Router, private userService: UserService, private articleService: ArticleService) {}
+    private router:Router, private userService: UserService, private articleService: ArticleService) {
+      //  this.articleService.getPhoto()
+       this.authService.user.subscribe(user => {
+        if (user) {
+         
+          console.log('author id 2:', user.uid); // Debugging line
+          // this.id=user.uid
+        }
+      });
+    }
   //================  articles ====================
   trendy!:any;
   articles: any|null;
   ngOnInit(): void {
-
     //============================== GET ALL ARTICLES ======================================
     this.articles = this.articleService.articles;
     this.trendy = this.articleService.trendings;
+    // this.articleService.likedArticles()
     
 }
 
@@ -38,13 +47,13 @@ export class HomePage implements OnInit{
     // apply search filter
     if (!this.searchTerm.trim()) {
       // if search term is empty or whitespace, return all articles
-      console.log("Search term is empty or whitespace. Showing all articles.");
+      // console.log("Search term is empty or whitespace. Showing all articles.");
     } else {
       // filter articles that match the search term
       filtered = this.articles.filter((article: { data: { title: string; }; }) =>
         article.data.title.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
-      console.log("Showing articles that match search term:", this.searchTerm);
+      // console.log("Showing articles that match search term:", this.searchTerm);
     }
   
     // apply category filter
@@ -52,9 +61,9 @@ export class HomePage implements OnInit{
       filtered = filtered.filter((article: { data: { category: string; }; }) => {
         return article.data.category === this.selectedCategory;
       });
-      console.log("Showing articles in category:", this.selectedCategory);
+      // console.log("Showing articles in category:", this.selectedCategory);
     } else {
-      console.log("Showing articles in all categories.");
+      // console.log("Showing articles in all categories.");
     }
   
     return filtered;

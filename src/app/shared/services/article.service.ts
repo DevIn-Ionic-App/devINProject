@@ -23,6 +23,7 @@ id:any
  articles:any = [];
  trendings :any = [];
  liked : any = [];
+ idArticles  = []
  twentyFourHoursAgo = new Date(Date.now() - (24 * 60 * 60 * 1000));
  author :any
 //====================================== CREATE ARTICLE ===========================================
@@ -59,7 +60,7 @@ async createArticle(article:any) {
    let id = doc.data()['authorId']
    let data = doc.data()
    let author = await this.profileDetails(id)
-   console.log(author)
+  //  console.log(author)
    let article = { author, data}
    //console.log(article)
      //this.articles.unshift(article);
@@ -85,7 +86,7 @@ async createArticle(article:any) {
      let id = doc.data()['authorId']
       let data = doc.data()
       let author = await this.profileDetails(id)
-      console.log(author)
+      // console.log(author)
       let article = { author, data}
       const index = this.trendings.findIndex((existingArticle: { data: { uid: any; }; }) => {
         return existingArticle.data.uid === article.data['uid'];
@@ -143,31 +144,17 @@ async articleDetails(uid: string | null): Promise<any> {
   }
 }
 //============================= GET LIKED ARTICLES ===============================
-likedArticles(id:string) {
-  const Like = query(collection(this.firestore, "likes"), where("idAuthor","==",id));
-  const unsubscribe3 = onSnapshot(Like, (querySnapshot) => {
-
+likedArticles() {
+  let idsOfArticles = []
+   const Like = query(collection(this.firestore, "likes"), where("idAuthor","==",this.id));
+   const unsubscribe3 = onSnapshot(Like, (querySnapshot) => {
 querySnapshot.forEach(async (doc) => {
-   let id = doc.data()['authorId']
-    let data = doc.data()
-    let author = await this.profileDetails(id)
-    console.log(author)
-    let article = { author, data}
-    const index = this.trendings.findIndex((existingArticle: { data: { uid: any; }; }) => {
-      return existingArticle.data.uid === article.data['uid'];
-    });
+    let idArticle = doc.data()['idArticle']
+    idsOfArticles.push(idArticle);
  
-    if (index === -1) {
-      // If the article doesn't exist, unshift it to the array
-      this.trendings.unshift(article);
-    } else {
-      // If the article already exists, replace it with the updated version
-      this.trendings[index] = article;
-    }
-
-
-});
+    });
 });
 
  }
+
 }
