@@ -1,5 +1,5 @@
 .formbtn{
-    position: absolute;
+   // position: absolute;
     bottom: 0px;
     width: 100%;
 }
@@ -8,4 +8,43 @@
     height: 29px;
     border-radius: 50%;
     margin-right: 5px;
+  }
+  ion-item >span{
+    right: 0;
+    position: absolute;
+  }
+  .input-wrap{
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: inherit;
+    align-items: inherit;
+    align-self: stretch;
+    text-overflow: ellipsis;
+    overflow: inherit;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+  .input-wrap2{
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: inherit;
+    align-items: inherit;
+    align-self: stretch;
+    text-overflow: ellipsis;
+    overflow: inherit;
+    box-sizing: border-box;
+  }
+  .input-wrap3{
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column ;
+    align-items: inherit;
+    align-self: stretch;
+    text-overflow: ellipsis;
+    overflow: inherit;
+    box-sizing: border-box;
+  }
+  .input-wrap3>span:nth-child(1){
+    font-weight: 800;
+  
   }
