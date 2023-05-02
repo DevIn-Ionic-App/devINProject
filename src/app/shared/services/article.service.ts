@@ -1,31 +1,68 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { Firestore,  addDoc, collectionData, docData, setDoc, } from '@angular/fire/firestore';
 import { AuthService } from 'app/core/auth.service';
-import { collection, query, where, onSnapshot, getDocs, getDoc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, getDocs, getDoc, CollectionReference, updateDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
-
+import { Observable, combineLatest, filter, from, map, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
+export class ArticleService implements OnInit{
 id:any
-  constructor(private firestore: Firestore, private as: AuthService
+userId:any
+  user$!: Observable<any>;
+
+  articles:any = [];
+  trendings :any = [];
+  liked : any = [];
+  saved : any = [];
+
+  idArticles  = []
+  twentyFourHoursAgo = new Date(Date.now() - (24 * 60 * 60 * 1000));
+  author :any
+  
+  constructor(private firestore: Firestore, private as: AuthService,
+
+
  ) { 
-  this.as.user.subscribe(user => {
+
+   this.as.user.subscribe(user => {
     if (user) {
      
       console.log('author id:', user.uid); // Debugging line
       this.id=user.uid
+      
     }
   });
- }
- articles:any = [];
- trendings :any = [];
- liked : any = [];
- idArticles  = []
- twentyFourHoursAgo = new Date(Date.now() - (24 * 60 * 60 * 1000));
- author :any
+  //====================== get logged user ============================
+
+}
+ngOnInit() {
+this.user$ = this.as.user.pipe(
+  switchMap(user => {
+    if (user) {
+      const collectionuser = collection(this.firestore, 'users');
+      const docRef = doc(collectionuser, user.uid);
+
+      return from(getDoc(docRef).then(doc => doc.data()));
+    } else {
+      return of(null);
+    }
+  })
+);
+this.user$.subscribe(user => {
+  if (user) {
+    this.userId = user.id
+    this.id = user.id;
+   console.log(this.userId)
+
+  }})
+}
+
+
+
 //====================================== CREATE ARTICLE ===========================================
 async createArticle(article:any) {
   try {
@@ -40,6 +77,17 @@ async createArticle(article:any) {
     return true;
   } catch (e) {
     console.error("Error adding document: ", e);
+    throw null;
+  }
+}
+//================================== UPDATE ARTILES =================================================
+async updateArticle(articleId: string, updatedArticleData: any): Promise<boolean> {
+  try {
+    const articleRef = doc(this.firestore, 'articles', articleId);
+    await updateDoc(articleRef, updatedArticleData);
+    return true;
+  } catch (e) {
+    console.error("Error updating document: ", e);
     throw null;
   }
 }
@@ -144,17 +192,109 @@ async articleDetails(uid: string | null): Promise<any> {
   }
 }
 //============================= GET LIKED ARTICLES ===============================
-likedArticles() {
-  let idsOfArticles = []
-   const Like = query(collection(this.firestore, "likes"), where("idAuthor","==",this.id));
-   const unsubscribe3 = onSnapshot(Like, (querySnapshot) => {
-querySnapshot.forEach(async (doc) => {
-    let idArticle = doc.data()['idArticle']
-    idsOfArticles.push(idArticle);
- 
-    });
-});
 
- }
+getLiked(): Observable<any> {
+  return new Observable((observer) => {
+    let ids: any[] = [];
+    const unsubscribe = this.as.user.subscribe((user) => {
+      if (user) {
+        const like = query(collection(this.firestore, "likes"), where("idAuthor", "==", user.uid));
+        
+        // Use get method to retrieve initial data
+        getDocs(like).then((querySnapshot) => {
+          ids = [];
+          querySnapshot.forEach((doc) => {
+            ids.push(doc.data()['idArticle']);
+          });
+          const liked = this.articles.filter((article: { data: { uid: any; }; }) => ids.includes(article.data.uid));
+          this.liked = liked;
+          console.log(liked);
+          observer.next(liked);
+        });
+
+        // Use onSnapshot to listen for changes
+        const listener = onSnapshot(like, (querySnapshot) => {
+          ids = [];
+          querySnapshot.forEach((doc) => {
+            ids.push(doc.data()['idArticle']);
+          });
+          const liked = this.articles.filter((article: { data: { uid: any; }; }) => ids.includes(article.data.uid));
+          this.liked = liked;
+
+          observer.next(liked);
+        });
+        // Return the listener instead of the unsubscribe function
+        observer.next(listener);
+      }
+    });
+  });
+}
+
+getSaved(): Observable<any> {
+  return new Observable((observer) => {
+    let ids: any[] = [];
+    const unsubscribe = this.as.user.subscribe((user) => {
+      if (user) {
+        const save = query(collection(this.firestore, "saved"), where("idAuthor", "==", user.uid));
+        
+        // Use get method to retrieve initial data
+        getDocs(save).then((querySnapshot) => {
+          ids = [];
+          querySnapshot.forEach((doc) => {
+            ids.push(doc.data()['idArticle']);
+          });
+          const saved = this.articles.filter((article: { data: { uid: any; }; }) => ids.includes(article.data.uid));
+          this.saved = saved;
+
+          observer.next(saved);
+        });
+
+        // Use onSnapshot to listen for changes
+        const listener = onSnapshot(save, (querySnapshot) => {
+          ids = [];
+          querySnapshot.forEach((doc) => {
+            ids.push(doc.data()['idArticle']);
+          });
+          const saved = this.articles.filter((article: { data: { uid: any; }; }) => ids.includes(article.data.uid));
+          this.saved = saved;
+
+          observer.next(saved);
+        });
+        // Return the listener instead of the unsubscribe function
+        observer.next(listener);
+      }
+    });
+  });
+}
+
+//============================= GET My ARTICLES ===============================
+
+getMine(): Observable<any> {
+  return new Observable((observer) => {
+    let ids: any[] = [];
+    const unsubscribe = this.as.user.subscribe((user) => {
+      if (user) {
+        const my = query(collection(this.firestore, "articles"), where("authorId", "==", user.uid));
+        const listener = onSnapshot(my, (querySnapshot) => {
+          ids = [];
+          querySnapshot.forEach((doc) => {
+            ids.push(doc.data()['uid']);
+          });
+          const mine = this.articles.filter((article: { data: { uid: any; }; }) => ids.includes(article.data.uid))
+
+          observer.next(mine);
+        });
+        // Return the listener instead of the unsubscribe function
+        observer.next(listener);
+      }
+    });
+   
+  });
+}
+
+
+
+
+
 
 }

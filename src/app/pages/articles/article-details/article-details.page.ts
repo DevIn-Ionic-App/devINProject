@@ -86,19 +86,19 @@ if(this.likedornot>0){
   }
  
  // open the modall
-  async showComments() {
-    let comments =  await this.commentService.comments
+ async showComments() {
+  let comments =  await this.commentService.comments
 
-    const modal = await this.modalController.create({
-      component: CommentsPagePage,
-      componentProps: {
-        comment: comments,
-        idarticle:this.idarticle,
-        idauthor: this.uid
-      },
-    });
-    return await modal.present();
-  }
+  const modal = await this.modalController.create({
+    component: CommentsPagePage,
+    componentProps: {
+      comment: comments,
+      idarticle:this.idarticle,
+      idauthor: this.uid
+    },
+  });
+  return await modal.present();
+}
   LikeArticle(){
     if(!this.clicked){
       this.clicked=true;

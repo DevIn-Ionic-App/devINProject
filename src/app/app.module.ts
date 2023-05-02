@@ -16,6 +16,7 @@ import { CoreModule } from './core/core.module';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { AuthService } from './core/auth.service';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { SharedModule } from './shared/shared.module';
     provideDatabase(() => getDatabase()), 
     provideFirestore(() => getFirestore()), 
     provideStorage(() => getStorage())],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },AuthService
   ],
   bootstrap: [AppComponent],
 })

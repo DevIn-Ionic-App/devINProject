@@ -18,14 +18,20 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-
+  userId:any
   user:Observable<firebase.User | null>;
   constructor(private auth: Auth, private firestore: Firestore ,    private afAuth: AngularFireAuth,
     ) {
-    {
+    
       this.user = this.afAuth.authState as Observable<User | null>;
       console.log('this is firestor observables',this.user)
-    }  }
+      this.user.subscribe( user => {
+        if (user) {
+          this.userId = user.uid;
+     
+       
+       } }) 
+      }
 
   async register({name,email,password}: {name: string;email: string;password: string}) {
     try {

@@ -1,4 +1,8 @@
 <ion-content class="home" >
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+<ion-content class="home" *ngIf="!isLoading">
      <div class="home-header">
 
       <ion-searchbar [(ngModel)]="searchTerm" color="light" class="search-bar" ></ion-searchbar>
@@ -29,13 +33,15 @@
       <!-- =========================================== articles categories =================================== -->
       <div class="categories">
         <ul>
-          <li>All</li>
-          <li>Liked</li>
-          <li>Saved</li>
+          <li (click)="choseAll()">All</li>
+          <li (click)="choseLike()">Liked</li>
+          <li (click)="choseSave()">Saved</li>
+          <li (click)="choseMine()">My articles</li>
        
         </ul>
       </div>
-      <div class="articles">
+      <div class="no-result" *ngIf="filteredArticles.length==0">No results found</div>
+      <div class="articles" >
         <div *ngFor="let article of filteredArticles">
           <div class="article" (click)="goToArticleDetails(article.data.uid)">
             <img src="{{article.data.photo}}"/>
@@ -47,6 +53,7 @@
                 <p><span class="date"> 🕑 </span>{{article.data.date| now}}</p>
               </div>
             </div>
+            <button *ngIf="chooseMine">edit</button>
           </div>
         </div>
       </div>
