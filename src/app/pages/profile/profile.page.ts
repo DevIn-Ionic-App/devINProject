@@ -33,6 +33,7 @@ export class ProfilePage implements OnInit {
   
   ngOnInit() {
     console.log("this is profile")
+    console.log(this.isLoading)
     this.as.user.subscribe(user =>{
       this.userinfo=user
 this.uid =user?.uid;
@@ -72,6 +73,7 @@ this.uid =user?.uid;
       
     }); 
     this.isLoading=false 
+    console.log(this.isLoading)
   }
 
 
@@ -122,6 +124,8 @@ this.uid =user?.uid;
   }
 // update the profile !
   async updateProfile(){
+    this.isLoading=true
+    console.log('edit profile',this.isLoading)
     try{
       if(!this.image){
         this.image='';
@@ -161,6 +165,9 @@ this.uid =user?.uid;
   } catch (error) {
     console.error('Error upadate user: ', error);
   }
+  this.isLoading=false
+  console.log('edit profile',this.isLoading)
+
   }
 
   // sign out 

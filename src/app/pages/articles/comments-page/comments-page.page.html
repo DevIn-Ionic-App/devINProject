@@ -9,11 +9,24 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let comment of comments">
-      <img class="author-image" src="../../../assets/images/professionnalWoman.jpg" />
-      {{ comment.text }}
+    <ion-item *ngFor="let comment of allcomment">
+      <div class="input-wrap">
+      <div class="input-wrap2">
+      <img class="author-image" *ngIf="comment.author?.imageUrl" src="{{comment.author?.imageUrl}}" />
+      <img class="author-image" *ngIf="!comment.author?.imageUrl" src="../../../../assets/images/avatar.jpg!bg" />
+      <div class="input-wrap3">
+        <span>{{comment.author.name}}</span>
+      <span>{{ comment.data?.comment }}</span> 
+    </div> 
+    </div> 
+     <div>        
+      <span>{{comment.data.date| now}}</span>
+     </div>
+     </div>
     </ion-item>
   </ion-list>
+
+</ion-content>
 <div class="formbtn">
   <ion-item >
     <ion-label position="floating">Add a comment</ion-label>
@@ -22,4 +35,3 @@
   
   <ion-button expand="block" (click)="addComment(newCommentText)">Add Comment</ion-button>
 </div>
-</ion-content>

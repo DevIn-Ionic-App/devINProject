@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from 'app/shared/services/article.service';
 import { LikesService } from 'app/shared/services/likes.service';
 import { AuthService } from 'app/core/auth.service';
+import { CommentsService } from 'app/shared/services/comments.service';
 
 @Component({
   selector: 'app-article-details',
@@ -24,23 +25,22 @@ profileDet:any
 uid:any
 isLoading: boolean = true;
 iconSave:any="fa-regular fa-bookmark"
+allcomment:any=this.commentService.comments
+
   constructor(private modalController: ModalController,
     private route: ActivatedRoute,
     private articleService:ArticleService,
     private likesService:LikesService,
+    private commentService:CommentsService,
     private as:AuthService,
     private savedService:SavedService,
     private renderer: Renderer2) {
       
   }
 
-  async showComments() {
-    const modal = await this.modalController.create({
-      component: CommentsPagePage,
-    });
-    return await modal.present();
-  }
 
+
+  
   async ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.as.user.subscribe(user =>{
@@ -50,6 +50,7 @@ iconSave:any="fa-regular fa-bookmark"
           })
           console.log(this.isLoading)
     this.idarticle = id;
+    
     try {
       this.likedornot =  this.likesService.LikedOrNot(this.idarticle,this.uid)
       console.log('liked or not',this.likedornot)
@@ -84,7 +85,20 @@ if(this.likedornot>0){
     console.log(this.isLoading)
   }
  
- 
+ // open the modall
+  async showComments() {
+    let comments =  await this.commentService.comments
+
+    const modal = await this.modalController.create({
+      component: CommentsPagePage,
+      componentProps: {
+        comment: comments,
+        idarticle:this.idarticle,
+        idauthor: this.uid
+      },
+    });
+    return await modal.present();
+  }
   LikeArticle(){
     if(!this.clicked){
       this.clicked=true;
