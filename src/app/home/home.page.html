@@ -1,4 +1,7 @@
-<ion-content class="home" >
+<div class="spinner" *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</div>
+<ion-content class="home" *ngIf="!isLoading">
      <div class="home-header">
 
       <ion-searchbar [(ngModel)]="searchTerm" color="light" class="search-bar" ></ion-searchbar>
@@ -29,16 +32,16 @@
       <!-- =========================================== articles categories =================================== -->
       <div class="categories">
         <ul>
-          <li>All</li>
-          <li>Liked</li>
-          <li>Saved</li>
+          <li (click)="savedClick = false; likedClick = false;">All</li>
+          <li (click)="likedClick= true ;savedClick = false;">Liked</li>
+          <li (click)="savedClick = true ;likedClick = false;">Saved</li>
        
         </ul>
       </div>
       <div class="articles">
         <div *ngFor="let article of filteredArticles">
           <div class="article" (click)="goToArticleDetails(article.data.uid)">
-            <img src="{{article.data.photo}}"/>
+            <img src="{{article.data?.photo}}"/>
             <div class="article-data">
              <a >{{article.data.title}}</a>
               <div class="article-author">

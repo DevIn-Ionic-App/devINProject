@@ -9,6 +9,6 @@ import { AuthService } from './auth.service';
   imports: [
     CommonModule,],
  
-  
+  providers: [AuthService]
 })
 export class CoreModule { }

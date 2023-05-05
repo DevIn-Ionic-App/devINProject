@@ -9,6 +9,8 @@ import { doc } from "firebase/firestore";
 })
 export class SavedService {
   id:any
+  savedPosts:any
+  idCurrentuser: any;
   constructor(private firestore: Firestore, private as: AuthService
  ) { 
  }
@@ -57,7 +59,7 @@ export class SavedService {
   }
   
    //========================== getNumber of likes of likes =================================
-   async SavedOrNot(idarticle: string, idauthor: string): Promise<number> {
+   async SavedOrNot(idarticle: string | null, idauthor: string): Promise<number> {
     // get a reference to the collection
     const getArticle = query(collection(this.firestore, "saved"), where("idArticle", "==", idarticle), where("idAuthor", "==", idauthor));
     const querySnapshot = await getDocs(getArticle);

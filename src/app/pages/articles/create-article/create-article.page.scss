@@ -25,7 +25,7 @@
      .choose-photo{
         display: flex;
         background: url('../../../../assets/images/background10.jpeg') 92% no-repeat  ;
-        height:300px;
+        height:300px !important;
         width: 90%;
         margin:20px auto;
         border-radius:15px;
@@ -50,11 +50,13 @@
         }}
     }
     .choosen{
-         height:300px;
+        //  height:200px !important;
         width: 90%;
-        margin:20px auto;
+        margin:10px auto;
        img{
         border-radius:15px;
+        height:300px !important;
+        width: 100%;
        }
        p{
         margin:10px auto;

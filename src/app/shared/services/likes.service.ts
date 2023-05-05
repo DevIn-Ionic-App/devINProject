@@ -59,7 +59,7 @@ export class LikesService {
   }
   
    //========================== getNumber of likes of likes =================================
-   async LikedOrNot(idarticle: string, idauthor: string): Promise<number> {
+   async LikedOrNot(idarticle: string | null, idauthor: string): Promise<number> {
     // get a reference to the collection
     const getArticle = query(collection(this.firestore, "likes"), where("idArticle", "==", idarticle), where("idAuthor", "==", idauthor));
     const querySnapshot = await getDocs(getArticle);
@@ -72,7 +72,7 @@ export class LikesService {
   
   // ===================== get if the user liked or not the article =================
 
-  async numberoflikes(idarticle: string): Promise<number> {
+  async numberoflikes(idarticle: string | null) : Promise<number> {
     // get a reference to the collection
     const getArticle = query(collection(this.firestore, "likes"), where("idArticle", "==", idarticle));
     const querySnapshot = await getDocs(getArticle);

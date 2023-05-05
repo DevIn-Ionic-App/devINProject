@@ -52,37 +52,50 @@ allcomment:any=this.commentService.comments
     this.idarticle = id;
     
     try {
-      this.likedornot =  this.likesService.LikedOrNot(this.idarticle,this.uid)
-      console.log('liked or not',this.likedornot)
+     
       this.articleDet = await this.articleService.articleDetails(id);
       console.log(this.articleDet.authorId);
       this.nblikes = await this.likesService.numberoflikes(this.idarticle);
+      console.log(`Number of likes: ${this.nblikes}`);
       this.likedornot =  await this.likesService.LikedOrNot(this.idarticle,this.uid)
       console.log(`liked or not':${this.likedornot}`)
       this.savedornot =  await this.savedService.SavedOrNot(this.idarticle,this.uid)
-      console.log(`liked or not':${this.savedornot}`)
-console.log(`Number of likes: ${this.nblikes}`);
-if(this.likedornot>0){
-  this.clicked=true
-  const divElement = document.getElementById('likes');
-  const iconLikes = document.getElementById('iconlikes');
-  this.renderer.setStyle(divElement, 'background', '#ca0202');
-  this.renderer.setStyle(divElement, 'color', 'white');
-  this.renderer.setStyle(iconLikes, 'color', 'white');
+      console.log(`saved or not':${this.savedornot}`)
 
-  }
-  if(this.savedornot>0){
-    this.clickedSave=true
-    this.iconSave="fa-solid fa-bookmark"  
-    }
+
        this.profileDet = await this.articleService.profileDetails(this.articleDet.authorId);
       console.log(this.articleDet.title);
        console.log(this.profileDet.name);
+       this.isLoading=false
+    console.log('this is loading ',this.isLoading)
     } catch (e) {
       console.error("Error fetching article: ", e);
     }
-    this.isLoading=false
-    console.log(this.isLoading)
+    
+
+    if (this.savedornot > 0) {
+      this.clickedSave = true;
+      this.iconSave = "fa-solid fa-bookmark";
+    }
+    
+    if (this.likedornot > 0) {
+      console.log("m in the liked or not condition ")
+      const divElement = document.querySelector('.likes');
+      const iconLikes = document.querySelector('.iconlikes');
+      
+      if (divElement) {
+        console.log("div element is readed ")
+        this.renderer.setStyle(divElement, 'background', '#ca0202');
+        this.renderer.setStyle(divElement, 'color', 'white');
+      }
+      
+      if (iconLikes) {
+        this.renderer.setStyle(iconLikes, 'color', 'white');
+      }
+      this.clicked = true;
+
+    }
+    
   }
  
  // open the modall
