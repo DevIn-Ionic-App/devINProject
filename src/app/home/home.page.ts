@@ -27,6 +27,7 @@ export class HomePage implements OnInit{
   savedClick:boolean=false
   likedClick: boolean=false;
   mineClick:boolean=false
+  profilImg:any
   constructor(private as: AuthService,private firestore:Firestore,
     private router:Router, private userService: UserService,private commentService:CommentsService, private articleService: ArticleService) {}
   //================  articles ====================
@@ -34,18 +35,30 @@ export class HomePage implements OnInit{
   articles: any|null;
   async ngOnInit() {
     this.as.user.pipe(
-      switchMap((user :any ):any => {
+      switchMap(async (user :any ):Promise<any> => {
         if (user) {
+          this.profilImg = await this.articleService.profileDetails(user.uid)
+         if(this.profilImg.imageUrl!='') {
+            this.profilImg = this.profilImg.imageUrl
+            console.log(this.profilImg)
+
+            // do something with the profile data
+          }
+        else {
           
+            this.profilImg = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+            console.log(this.profilImg)
+
+          }
            this.articleService.setid(user.uid);
            this.articleService.setidliked(user.uid);
            this.articleService.setidmine(user.uid);
      this.allminesavedpost = this.articleService.savedPosts;
      this.allminelikedpost=this.articleService.likedPosts;
      this.allminePosts=this.articleService.minePosts;
+  
      console.log("this is my posts",this.allminesavedpost)
      return true
-
 
 
         } else {
@@ -60,10 +73,17 @@ export class HomePage implements OnInit{
     //============================== GET ALL ARTICLES ======================================
     this.articles = this.articleService.articles;
     this.trendy = this.articleService.trendings;
+    if(this.articleService.trendings.length==0){
+      this.trendy =  this.articleService.articles
+      
+    }
+    
     this.isLoading=false;
     console.log('this is all mine saved post', this.allminesavedpost);
 
 }
+//================= get user profile ======================
+
 
   //================    logout ===========================
   get filteredArticles() {
