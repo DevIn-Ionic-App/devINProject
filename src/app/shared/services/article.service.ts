@@ -11,6 +11,7 @@ import { doc } from "firebase/firestore";
 export class ArticleService {
 id:any
   savedPosts: any;
+  minePosts: any;
   idCurrentuser:any
   likedPosts:any
   constructor(private firestore: Firestore, private as: AuthService
@@ -298,6 +299,72 @@ setidliked(data: any) {
 
         if (index2 !== -1) {
           this.likedPosts.splice(index2, 1);
+        }
+      }
+    });
+  });
+}
+
+
+// ==================================== posts by current user  ============================================
+setidmine(data: any) {
+  this.minePosts = [];
+  console.log('Data received in service for mine posts:', data);
+  this.idCurrentuser = data;
+  console.log('set id in article service for mine posts here', data)
+
+  this.minePosts = [];
+  
+  const commentsRef2 = collection(this.firestore, "articles");
+  const queryy2 = query(commentsRef2, where("authorId", "==", this.idCurrentuser));
+
+  
+  // Listen to the onSnapshot event for the saved collection
+  const unsubscribe9 = onSnapshot(queryy2, (querySnapshot2: any) => {
+
+    // Loop through each document in the query snapshot
+    querySnapshot2.forEach(async (doc: { data: () => { (): any; new(): any; [x: string]: any; }; }) => {
+      const id2 = doc.data()['uid'];
+      const dataa2 = doc.data();
+      const data = await this.articleDetails(id2);
+      const author = await this.profileDetails(this.idCurrentuser);
+      console.log('in the select of mine articles by current user', data);
+      const articles2 = { author, dataa2, data };
+
+      // Check if the article already exists in the array
+      const index2 = this.minePosts.findIndex((existingposts: { data: any }) => {
+        return (existingposts.data.authorId === articles2.data['authorId'] && existingposts.data.uid === articles2.data['uid']);
+      });
+
+      if (index2 === -1) {
+        // If the article doesn't exist, push it to the array
+        this.minePosts.push(articles2);
+      } else {
+        // If the article already exists, replace it with the updated version
+        this.minePosts[index2] = articles2;
+      }
+    });
+
+    // Loop through each document in the saved collection
+    querySnapshot2.docChanges().forEach((change: any) => {
+      const id2 = change.doc.data()['idArticle'];
+
+      if (change.type === "added") {
+        console.log("New document added with ID: ", id2);
+      }
+      if (change.type === "modified") {
+        console.log("Document modified with ID: ", id2);
+      }
+      if (change.type === "removed") {
+        console.log("Document removed with ID: ", id2);
+
+        // Find the index of the article in the savedPosts array and remove it
+        const index2 = this.minePosts.findIndex((existingposts: { data: any }) => {
+          return (existingposts.data.uid === id2);
+        });
+
+        if (index2 !== -1) {
+          this.minePosts.splice(index2, 1);
         }
       }
     });

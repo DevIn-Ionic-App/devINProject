@@ -32,9 +32,10 @@
       <!-- =========================================== articles categories =================================== -->
       <div class="categories">
         <ul>
-          <li (click)="savedClick = false; likedClick = false;">All</li>
-          <li (click)="likedClick= true ;savedClick = false;">Liked</li>
-          <li (click)="savedClick = true ;likedClick = false;">Saved</li>
+          <li (click)="savedClick = false; likedClick = false; mineClick=false ">All</li>
+          <li (click)="likedClick= true ;savedClick = false; mineClick=false">Liked</li>
+          <li (click)="savedClick = true ;likedClick = false; mineClick=false">Saved</li>
+          <li (click)="savedClick = false ;likedClick = false; mineClick=true">Mine</li>
        
         </ul>
       </div>

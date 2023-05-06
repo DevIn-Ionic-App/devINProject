@@ -23,9 +23,10 @@ export class HomePage implements OnInit{
   savedArticles$: any;
   allminesavedpost:any;
   allminelikedpost:any;
+  allminePosts:any;
   savedClick:boolean=false
   likedClick: boolean=false;
-
+  mineClick:boolean=false
   constructor(private as: AuthService,private firestore:Firestore,
     private router:Router, private userService: UserService,private commentService:CommentsService, private articleService: ArticleService) {}
   //================  articles ====================
@@ -38,8 +39,10 @@ export class HomePage implements OnInit{
           
            this.articleService.setid(user.uid);
            this.articleService.setidliked(user.uid);
+           this.articleService.setidmine(user.uid);
      this.allminesavedpost = this.articleService.savedPosts;
      this.allminelikedpost=this.articleService.likedPosts;
+     this.allminePosts=this.articleService.minePosts;
      console.log("this is my posts",this.allminesavedpost)
      return true
 
@@ -100,6 +103,13 @@ export class HomePage implements OnInit{
       this.savedClick=false
       filtered=this.allminelikedpost
       console.log('this liked click ',this.likedClick)
+      console.log("filtered articles",filtered)
+    }
+    if(this.mineClick){
+      this.savedClick=false
+      this.likedClick=false
+      filtered=this.allminePosts
+      console.log('this mine click ',this.mineClick)
       console.log("filtered articles",filtered)
     }
        // If a user is logged in, filter articles based on user likes/saves
