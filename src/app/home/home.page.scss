@@ -55,6 +55,8 @@ ion-content.home{
       height: 40px;
       margin: 0 auto;
       margin-right: 20px;
+      border: 2px solid var(--lgreen);
+
     }
   }
   .home-content{
@@ -197,14 +199,21 @@ ion-content.home{
           font-weight: 600;
           color:var(--gray);
           cursor: pointer;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         
         .article-author{
+          justify-self: end;
+          align-self: flex-end;
           display: flex;
           align-items: center;
           justify-content:flex-start;
           margin-bottom:10px;
-          margin-top:5px;
+          // margin-top:15px;
 
         align-self:baseline;
           img{

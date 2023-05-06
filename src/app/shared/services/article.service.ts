@@ -13,6 +13,7 @@ id:any
   savedPosts: any;
   idCurrentuser:any
   likedPosts:any
+  profilImg: any;
   constructor(private firestore: Firestore, private as: AuthService
  ) { 
   this.as.user.subscribe(user => {
@@ -103,7 +104,22 @@ async createArticle(article:any) {
 
  });
 });
+async userprofile(id:any) {
+  let profile = await this.profileDetails(id)
+  if(!profile.imageUrl) {
+     this.profilImg = profile.imageUrl
+     console.log(this.profilImg)
 
+    // do something with the profile data
+  }
+ else {
+   
+     this.profilImg = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+     console.log(this.profilImg)
+
+  }
+ 
+}
   // ========================= Get article by id =====================================================
  
 
