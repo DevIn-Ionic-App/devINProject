@@ -41,7 +41,9 @@ export class HomePage implements OnInit{
          if(this.profilImg.imageUrl!='') {
             this.profilImg = this.profilImg.imageUrl
             console.log(this.profilImg)
-
+          if(this.profilImg.imageUrl=='') {
+            this.profilImg = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg'
+          }
             // do something with the profile data
           }
         else {
